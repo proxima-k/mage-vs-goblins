@@ -10,9 +10,12 @@ public class HealthSystem {
 
     public event Action OnDeath;
     
-    public HealthSystem(int health) {
+    public HealthSystem(int health, int? maxHealth = null) {
         _health = health;
-        _maxHealth = health;
+        if (maxHealth != null) 
+            _maxHealth = (int)maxHealth;
+        else
+            _maxHealth = health;
     }
 
     public void Heal(int amount) {
