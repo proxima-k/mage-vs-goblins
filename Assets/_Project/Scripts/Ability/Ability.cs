@@ -6,4 +6,9 @@ using UnityEngine;
 public class Ability : ScriptableObject {
     public string Name;
     public Sprite Icon;
+
+    public virtual void CastAbility() {
+        Debug.Log("Base class cast ability function");
+    }
 }
+
