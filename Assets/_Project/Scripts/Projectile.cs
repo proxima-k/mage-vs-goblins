@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour {
         
     private void OnCollisionEnter2D(Collision2D col) {
         // if the collided object has IDamageable, then damage it
+        if (col.gameObject.TryGetComponent(out IHealthDamageable healthDamageable))
+            healthDamageable.Damage(20);
         Destroy(gameObject);
     }
 }
