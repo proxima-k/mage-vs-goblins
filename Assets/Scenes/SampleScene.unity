@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a74538ed5c0ba7447a61bc0300e8818a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 20
+  _moveSpeed: 5
   _dashDuration: 0.15
   _dashSpeed: 50
 --- !u!50 &1980546844
@@ -354,6 +354,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fireballTf: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
   _fireballSpeed: 20
+  _laserDistance: 16.95
+  _laserWidth: 0.5
 --- !u!1 &2115380443
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,8 +367,9 @@ GameObject:
   - component: {fileID: 2115380445}
   - component: {fileID: 2115380444}
   - component: {fileID: 2115380446}
+  - component: {fileID: 2115380447}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,3 +466,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2115380447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115380443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ef00e40961fe14b9632a9651065780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
