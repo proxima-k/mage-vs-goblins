@@ -8,11 +8,23 @@ public class Projectile : MonoBehaviour {
         // collision layers
         // has a height (composition)
         // projectile type?
+    //
+    
+    private int _damage;
+    private LayerMask _collisionLayers = ~0;
         
-    private void OnCollisionEnter2D(Collision2D col) {
+    public void SetDamage(int amount) {
+        _damage = amount;
+    }
+
+    public void SetCollisionLayers(LayerMask collisionLayers) {
+        _collisionLayers = collisionLayers;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col) {
         // if the collided object has IDamageable, then damage it
         if (col.gameObject.TryGetComponent(out IHealthDamageable healthDamageable))
-            healthDamageable.Damage(20);
+            healthDamageable.Damage(_damage);
         Destroy(gameObject);
     }
 }

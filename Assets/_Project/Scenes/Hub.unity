@@ -352,8 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a95b5332279c194bbde4a10ca57645e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireballTf: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
-  _fireballSpeed: 20
+  _currOrb: {fileID: 11400000, guid: f08dade95d14ca14794dd30e76e06564, type: 2}
   _visualizeLaserArea: 0
   _laserDistance: 16.95
   _laserWidth: 0.5
