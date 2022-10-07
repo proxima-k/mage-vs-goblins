@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6773febd58e2ad84aa978dbbfcc24e2e, type: 3}
   m_Name: FireRayOrb
   m_EditorClassIdentifier: 
-  rayThickness: 6.47
-  rayDistance: 16
+  damage: 0
+  rayThickness: 0.5
+  rayDistance: 5.4

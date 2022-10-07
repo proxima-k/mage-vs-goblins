@@ -1,5 +1,3 @@
-using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class AttackSystem {
@@ -31,9 +29,10 @@ public class AttackSystem {
         float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
 
         // To cast box from the left side instead of center
-        Vector3 offsetOrigin = origin + targetDir;
+        float boxLength = 1;
+        Vector3 offsetOrigin = origin + targetDir*(boxLength*0.5f);
         
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(offsetOrigin, new Vector2(1,rayThickness), angle, targetDir, rayDistance-1, (int) collisionLayers);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(offsetOrigin, new Vector2(boxLength,rayThickness*2), angle, targetDir, rayDistance-boxLength, (int) collisionLayers);
         
         foreach (var hit in hits) {
             if(hit.transform.TryGetComponent(out IHealthDamageable healthDamageable))
@@ -41,7 +40,18 @@ public class AttackSystem {
         }
 
         if (debugRay) {
-            Debug.DrawLine(offsetOrigin, offsetOrigin+targetDir*(rayDistance-1), Color.green, 5f);
+            Matrix4x4 matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,angle));
+            Vector3 upperCorner = matrix4X4 * Vector3.up * rayThickness;
+            upperCorner += origin;
+            Vector3 lowerCorner = matrix4X4 * Vector3.down * rayThickness;
+            lowerCorner += origin;
+
+            Vector3 upperEnd = upperCorner + targetDir * rayDistance;
+            Vector3 lowerEnd = lowerCorner + targetDir * rayDistance;
+            
+            Debug.DrawLine(upperCorner, upperEnd, Color.green, 5f);
+            Debug.DrawLine(lowerCorner, lowerEnd, Color.green, 5f);
+            Debug.DrawLine(upperEnd, lowerEnd, Color.red, 5f);
         }
     }
 }

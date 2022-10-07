@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     // setup variables
-        // collision layers
         // has a height (composition)
         // projectile type?
-    //
     
     private int _damage;
     private LayerMask _collisionLayers = ~0;
@@ -23,8 +21,10 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col) {
         // if the collided object has IDamageable, then damage it
-        if (col.gameObject.TryGetComponent(out IHealthDamageable healthDamageable))
-            healthDamageable.Damage(_damage);
-        Destroy(gameObject);
+        if (_collisionLayers == (_collisionLayers | (1 << col.gameObject.layer))) {
+            if (col.gameObject.TryGetComponent(out IHealthDamageable healthDamageable))
+                healthDamageable.Damage(_damage);
+            Destroy(gameObject);
+        }
     }
 }

@@ -9,6 +9,6 @@ public class ProjectileOrb : Orb {
     public LayerMask collisionLayers;
 
     public override void Shoot(Vector3 origin, Vector3 targetDir) {
-        AttackSystem.ShootProjectile(projectileTf, damage, origin, targetDir,projectileSpeed);
+        AttackSystem.ShootProjectile(projectileTf, damage, origin, targetDir,projectileSpeed, collisionLayers);
     }
 }
