@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour {
     // setup variables
         // collision layers
         // has a height (composition)
+        // projectile type?
         
     private void OnCollisionEnter2D(Collision2D col) {
         // if the collided object has IDamageable, then damage it

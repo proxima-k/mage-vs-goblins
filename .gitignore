@@ -7,6 +7,8 @@
 
 # Paid assets
 
+# Personal assets
+/[Aa]ssets/_Project/Sprites/
 
 # main files to ignore
 /[Uu]serSettings/
