@@ -10,8 +10,10 @@ public class PlayerSkills : MonoBehaviour {
     [SerializeField] private float _fireballSpeed = 20f;
 
     [Header("Laser Properties")]
+    [SerializeField] private bool _visualizeLaserArea;
     [SerializeField] private float _laserDistance = 5f;
     [SerializeField] private float _laserWidth = 2f;
+    [SerializeField] private float _laserEndPointOffset = 0.1f;
 
     private void Start() {
         _cam = Camera.main;
@@ -40,10 +42,13 @@ public class PlayerSkills : MonoBehaviour {
     }
 
     private void ShootLaser() {
-        // shoots a laser across a given distance
+        // Gets direction and angle for box cast
         Vector2 targetDir = (PK.GetMouseWorldPosition2D(_cam) - (Vector2) transform.position).normalized;
-        float angle = Mathf.Atan2(targetDir.y, targetDir.y) * Mathf.Rad2Deg;
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(0.5f,_laserWidth), angle, targetDir, _laserDistance);
+        float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+        
+        // todo: resolve the endpoint offset since it doesn't allow for value of 0
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(_laserEndPointOffset,_laserWidth), angle, targetDir, _laserDistance);
+        
         foreach (var hit in hits) {
             if(hit.transform.TryGetComponent(out IHealthDamageable healthDamageable))
                 healthDamageable.Damage(5);
@@ -51,12 +56,16 @@ public class PlayerSkills : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        Vector3 origin = transform.position;
-        Vector3 targetPos = PK.GetMouseWorldPosition2D(Camera.main);
-        Vector3 targetDir = (targetPos - origin).normalized;
-        Gizmos.DrawCube(origin, Vector3.one * _laserWidth);
-        Gizmos.DrawCube(origin+targetDir*_laserDistance, Vector3.one * _laserWidth);
-        Gizmos.DrawLine(origin, origin+targetDir*_laserDistance);
-        
+        if (_visualizeLaserArea) {
+            Vector3 origin = transform.position;
+            Vector3 targetPos = PK.GetMouseWorldPosition2D(Camera.main);
+            Vector3 targetDir = (targetPos - origin).normalized;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+
+            Gizmos.color = Color.green;
+            Gizmos.matrix = Matrix4x4.TRS(origin + targetDir * _laserDistance * 0.5f, Quaternion.Euler(0, 0, angle),
+                Vector3.one);
+            Gizmos.DrawWireCube(Vector2.zero, new Vector3(2 * _laserEndPointOffset + _laserDistance, _laserWidth));
+        }
     }
 }

@@ -354,8 +354,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fireballTf: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
   _fireballSpeed: 20
+  _visualizeLaserArea: 0
   _laserDistance: 16.95
   _laserWidth: 0.5
+  _laserEndPointOffset: 0.1
 --- !u!1 &2115380443
 GameObject:
   m_ObjectHideFlags: 0
