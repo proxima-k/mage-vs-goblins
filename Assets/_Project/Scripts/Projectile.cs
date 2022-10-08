@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour {
     
     private int _damage;
     private LayerMask _collisionLayers = ~0;
-        
+
     public void SetDamage(int amount) {
         _damage = amount;
     }
@@ -19,11 +19,14 @@ public class Projectile : MonoBehaviour {
         _collisionLayers = collisionLayers;
     }
 
+    private bool hasHit;
     private void OnTriggerEnter2D(Collider2D col) {
         // if the collided object has IDamageable, then damage it
         if (_collisionLayers == (_collisionLayers | (1 << col.gameObject.layer))) {
-            if (col.gameObject.TryGetComponent(out IDamageable healthDamageable))
+            if (!hasHit && col.gameObject.TryGetComponent(out IDamageable healthDamageable)) {
                 healthDamageable.Damage(_damage);
+                hasHit = true;
+            }
             Destroy(gameObject);
         }
     }

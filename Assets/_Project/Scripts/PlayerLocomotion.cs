@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour {
     
-    private Rigidbody2D _rigidbody2D;
+    private Rigidbody2D _rb2D;
     private Vector2 _movementInput;
     [SerializeField] private float _moveSpeed = 10f;
     
@@ -18,7 +18,7 @@ public class PlayerLocomotion : MonoBehaviour {
     private Vector2 _dashDir;
     
     void Awake() {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rb2D = GetComponent<Rigidbody2D>();
     }
 
     void Update() {
@@ -33,7 +33,7 @@ public class PlayerLocomotion : MonoBehaviour {
 
         if (_isDashing) {
             _dashTimer -= Time.deltaTime;
-            _rigidbody2D.velocity = _dashDir * _dashSpeed;
+            _rb2D.velocity = _dashDir * _dashSpeed;
             if (_dashTimer <= 0)
                 _isDashing = false;
         }
@@ -43,7 +43,7 @@ public class PlayerLocomotion : MonoBehaviour {
     }
 
     void Move() {
-        _rigidbody2D.velocity = _movementInput.normalized * _moveSpeed;
+        _rb2D.velocity = _movementInput.normalized * _moveSpeed;
     }
 
     public void UpdateSpeed(float speed) {

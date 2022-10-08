@@ -15,7 +15,8 @@ public class AttackSystem {
         // projectile physics setup
         Rigidbody2D rb2D = fireballInstance.gameObject.AddComponent<Rigidbody2D>();
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb2D.gravityScale = 0;
+        rb2D.isKinematic = true;
+        // rb2D.gravityScale = 0;
 
         // add velocity/force towards direction
         rb2D.velocity = targetDir * projectileSpeed;
