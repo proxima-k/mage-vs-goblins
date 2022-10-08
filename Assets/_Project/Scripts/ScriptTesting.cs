@@ -10,8 +10,8 @@ public class ScriptTesting : MonoBehaviour {
     [SerializeField] private float angle = 45f;
     
     private void Update() {
-        Matrix4x4 matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,angle));
-        Vector3 resultPos = matrix4X4 * Vector3.right;
-        Debug.DrawLine(Vector3.zero, resultPos);
+        // Matrix4x4 matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,angle));
+        // Vector3 resultPos = matrix4X4 * Vector3.right;
+        // Debug.DrawLine(Vector3.zero, resultPos);
     }
 }

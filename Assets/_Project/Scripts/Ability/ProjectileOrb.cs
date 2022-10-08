@@ -8,7 +8,8 @@ public class ProjectileOrb : Orb {
     public float projectileSpeed = 30f;
     public LayerMask collisionLayers;
 
-    public override void Shoot(Vector3 origin, Vector3 targetDir) {
+    public override IEnumerator Shoot(Vector3 origin, Vector3 targetDir) {
         AttackSystem.ShootProjectile(projectileTf, damage, origin, targetDir,projectileSpeed, collisionLayers);
+        yield return null;
     }
 }

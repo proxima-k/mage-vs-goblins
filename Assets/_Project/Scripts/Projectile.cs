@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         // if the collided object has IDamageable, then damage it
         if (_collisionLayers == (_collisionLayers | (1 << col.gameObject.layer))) {
-            if (col.gameObject.TryGetComponent(out IHealthDamageable healthDamageable))
+            if (col.gameObject.TryGetComponent(out IDamageable healthDamageable))
                 healthDamageable.Damage(_damage);
             Destroy(gameObject);
         }

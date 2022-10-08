@@ -19,10 +19,12 @@ public class AttackSystem {
 
         // add velocity/force towards direction
         rb2D.velocity = targetDir * projectileSpeed;
+        
+        Object.Destroy(fireballInstance.gameObject,5f);
     }
 
     public static void ShootRay(int damage, Vector3 origin, Vector3 targetDir, float rayThickness, float rayDistance, LayerMask? collisionLayers=null, bool debugRay=false) {
-        if (collisionLayers==null)
+        if (collisionLayers == null)
             collisionLayers = ~0;
     
         // Gets direction and angle for box cast
@@ -35,15 +37,15 @@ public class AttackSystem {
         RaycastHit2D[] hits = Physics2D.BoxCastAll(offsetOrigin, new Vector2(boxLength,rayThickness*2), angle, targetDir, rayDistance-boxLength, (int) collisionLayers);
         
         foreach (var hit in hits) {
-            if(hit.transform.TryGetComponent(out IHealthDamageable healthDamageable))
+            if(hit.transform.TryGetComponent(out IDamageable healthDamageable))
                 healthDamageable.Damage(damage);
         }
 
         if (debugRay) {
             Matrix4x4 matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,angle));
             Vector3 upperCorner = matrix4X4 * Vector3.up * rayThickness;
-            upperCorner += origin;
             Vector3 lowerCorner = matrix4X4 * Vector3.down * rayThickness;
+            upperCorner += origin;
             lowerCorner += origin;
 
             Vector3 upperEnd = upperCorner + targetDir * rayDistance;

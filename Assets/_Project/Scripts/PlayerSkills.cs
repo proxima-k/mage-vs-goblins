@@ -16,7 +16,7 @@ public class PlayerSkills : MonoBehaviour {
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
             Vector3 targetDir = ((Vector3) PK.GetMouseWorldPosition2D(_cam) - transform.position).normalized;
-            _currOrb.Shoot(transform.position, targetDir);
+            StartCoroutine(_currOrb.Shoot(transform.position, targetDir));
         }
     }
 }

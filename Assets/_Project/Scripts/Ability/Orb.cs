@@ -6,10 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/Orb")]
 public class Orb : ScriptableObject {
     
-    [Range(0, 10000)]
+    [Range(0, 1000)]
     public int damage = 10;
     
-    public virtual void Shoot(Vector3 origin, Vector3 targetDir) {
-        
+    public virtual IEnumerator Shoot(Vector3 origin, Vector3 targetDir) {
+        yield return null;
     }
 }

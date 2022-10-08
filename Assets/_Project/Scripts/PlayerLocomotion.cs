@@ -25,7 +25,7 @@ public class PlayerLocomotion : MonoBehaviour {
         _movementInput.x = Input.GetAxisRaw("Horizontal");
         _movementInput.y = Input.GetAxisRaw("Vertical");
 
-        if (!_isDashing && Input.GetKeyDown(KeyCode.LeftShift)) {
+        if (!_isDashing && Input.GetKeyDown(KeyCode.Space)) {
             _isDashing = true;
             _dashTimer = _dashDuration;
             _dashDir = _movementInput.normalized;
