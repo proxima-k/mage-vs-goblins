@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     private HealthSystem _healthSystem;
     private EnemyLocomotion _locomotion;
 
+
     public void Awake() {
         _healthSystem = new HealthSystem(_maxHealth);
         _healthSystem.OnDeath += () => { StartCoroutine(Death()); };
@@ -19,7 +20,6 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     public void Damage(int damageAmount) {
         _healthSystem.Damage(damageAmount);
-        Debug.Log(_healthSystem.Health);
     }
     
     public IEnumerator Death() {

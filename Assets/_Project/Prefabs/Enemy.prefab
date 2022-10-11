@@ -158,5 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773a3967bf593d647bc84dd5da3954f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileTf: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
+  _projectileCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  _maxSpeed: 8
+  _maxSteeringForce: 3
   _chaseTarget: {fileID: 0}
-  _moveSpeed: 5
+  _directChaseDistance: 10
+  _attackDistance: 5
+  _attackRate: 1
