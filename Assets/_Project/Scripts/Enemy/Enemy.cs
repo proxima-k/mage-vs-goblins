@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     public void Damage(int damageAmount) {
         _healthSystem.Damage(damageAmount);
+        Debug.Log(_healthSystem.Health);
     }
     
     public IEnumerator Death() {
