@@ -14,4 +14,5 @@ public class GameAssets : MonoBehaviour {
     }
 
     public Transform DamagePopupPrefab;
+    public Transform DefaultProjectilePrefab;
 }

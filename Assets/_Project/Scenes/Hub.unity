@@ -419,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currOrb: {fileID: 11400000, guid: f08dade95d14ca14794dd30e76e06564, type: 2}
+  fireballAbility: {fileID: 11400000, guid: f470dbfc1cff27b4d8a18306c5fed8a3, type: 2}
 --- !u!1001 &4565825553695469329
 PrefabInstance:
   m_ObjectHideFlags: 0

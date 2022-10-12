@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ability {
+namespace AbilitySystem {
     [Serializable]
     public class Attribute<T> {
         [SerializeField] private List<T> attributeList;

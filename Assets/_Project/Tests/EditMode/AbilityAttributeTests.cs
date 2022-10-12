@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Ability;
+using AbilitySystem;
 
 namespace Tests {
     public class AbilityAttributeTests {

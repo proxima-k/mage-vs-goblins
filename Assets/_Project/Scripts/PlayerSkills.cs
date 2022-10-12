@@ -1,12 +1,11 @@
-using System;
 using Proxima_K.Utils;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using AbilitySystem;
 
 public class PlayerSkills : MonoBehaviour {
     private Camera _cam;
     [SerializeField] private Orb _currOrb;
+    [SerializeField] private Ability fireballAbility;
     
 
     private void Start() {
@@ -15,8 +14,7 @@ public class PlayerSkills : MonoBehaviour {
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
-            Vector3 targetDir = ((Vector3) PK.GetMouseWorldPosition2D(_cam) - transform.position).normalized;
-            StartCoroutine(_currOrb.Shoot(transform.position, targetDir));
+            StartCoroutine(fireballAbility.TriggerAbility(transform));
         }
     }
 }

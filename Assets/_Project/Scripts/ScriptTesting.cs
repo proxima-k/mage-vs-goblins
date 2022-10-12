@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Ability;
+using AbilitySystem;
 
 [ExecuteInEditMode]
 public class ScriptTesting : MonoBehaviour {
