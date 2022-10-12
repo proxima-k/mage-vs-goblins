@@ -25,6 +25,7 @@ public class ScriptTesting : MonoBehaviour {
         // Matrix4x4 matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,angle));
         // Vector3 resultPos = matrix4X4 * Vector3.right;
         // Debug.DrawLine(Vector3.zero, resultPos);
+        
     }
 
     private void OnDrawGizmos() {

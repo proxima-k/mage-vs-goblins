@@ -30,7 +30,7 @@ public class PlayerLocomotion : MonoBehaviour {
             _dashTimer = _dashDuration;
             _dashDir = _movementInput.normalized;
         }
-
+        
         if (_isDashing) {
             _dashTimer -= Time.deltaTime;
             _rb2D.velocity = _dashDir * _dashSpeed;

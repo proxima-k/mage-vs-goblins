@@ -17,10 +17,11 @@ public class Enemy : MonoBehaviour, IDamageable {
     public void Start() {
         _locomotion = GetComponent<EnemyLocomotion>();
     }
-
+    
     public void Damage(int damageAmount) {
         _healthSystem.Damage(damageAmount);
         Debug.Log(_healthSystem.Health);
+        DamagePopup.Create(damageAmount, transform.position + Vector3.up);
     }
     
     public IEnumerator Death() {
