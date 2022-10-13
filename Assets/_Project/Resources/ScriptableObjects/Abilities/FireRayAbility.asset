@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6773febd58e2ad84aa978dbbfcc24e2e, type: 3}
-  m_Name: FireRayOrb
+  m_Name: FireRayAbility
   m_EditorClassIdentifier: 
   damage: 10
   rayTf: {fileID: 9015967881369635174, guid: 54b073c169983334985d332301191ad9, type: 3}

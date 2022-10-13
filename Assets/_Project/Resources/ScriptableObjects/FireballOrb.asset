@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a6117fb75d0e748a555d702fe77d6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 571c85ab03f28c8409de68b5ed261e15, type: 3}
   m_Name: FireballOrb
   m_EditorClassIdentifier: 
-  damage: 12
-  projectileTf: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
-  projectileSpeed: 30
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 64
+  OrbName: 
+  AttackAbility: {fileID: 0}
