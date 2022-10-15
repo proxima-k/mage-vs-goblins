@@ -26,10 +26,11 @@ public class Enemy : MonoBehaviour, IDamageable {
     
     public IEnumerator Death() {
         // change this to IEnumerator if implementing a bunch of animation stuff that requires timing
-        // disable colliders
         // blink for a few times
         _locomotion.SetTarget(null);
-        
+        // disable colliders
+        GetComponent<Collider2D>().enabled = false;
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         float blinkPeriod = 0.05f;
