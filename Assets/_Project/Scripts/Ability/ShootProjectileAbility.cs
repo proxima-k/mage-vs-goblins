@@ -15,8 +15,9 @@ public class ShootProjectileAbility : Ability {
     private float projectileSpeed => projectileSpeedAttr.Value;
     public Attribute<int> projectileDamageAttr;
     private int projectileDamage=> projectileDamageAttr.Value;
-    
+
     public override IEnumerator TriggerAbility(Transform abilityCaster) {
+        // canCastAbility = false;
         if (projectilePrefab == null)
             projectilePrefab = GameAssets.i.DefaultProjectilePrefab;
         
@@ -25,5 +26,17 @@ public class ShootProjectileAbility : Ability {
         AttackSystem.ShootProjectile(projectilePrefab, projectileDamage, origin, targetDir, projectileSpeed, collisionLayers);
 
         yield return null;
+        // yield return new WaitForSeconds(abilityCooldown);
+        // canCastAbility = true;
+    }
+
+    public override void UpgradeAbility() {
+        projectileSpeedAttr.NextLevel();
+        projectileDamageAttr.NextLevel();
+    }
+
+    public override void ResetAbilityLevel() {
+        projectileSpeedAttr.ResetLevel();
+        projectileDamageAttr.ResetLevel();
     }
 }

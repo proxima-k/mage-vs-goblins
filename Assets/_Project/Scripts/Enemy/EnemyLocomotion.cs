@@ -92,7 +92,10 @@ public class EnemyLocomotion : MonoBehaviour {
         // if (target == null)
             // _rb2D.velocity = Vector2.zero;
         _chaseTarget = target;
-        if (target == null) return;
+        if (target == null) {
+            _rb2D.velocity = Vector2.zero;
+            return;
+        }
         
         // get random point around target
         int points = 16;

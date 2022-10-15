@@ -13,7 +13,7 @@ namespace Tests {
         [Test]
         public void GetAttributeValue() {
             List<int> attributeList = new List<int> {1, 3, 7, 10};
-            Attribute<int> projectileDamage = new Attribute<int>(attributeList);
+            Attribute<int> projectileDamage = new Attribute<int>("Damage",attributeList);
             
             Assert.AreEqual(attributeList[0], projectileDamage.Value);
         }
@@ -21,7 +21,7 @@ namespace Tests {
         [Test]
         public void LevelUpAttribute() {
             List<int> attributeList = new List<int> {1, 3, 7, 10};
-            Attribute<int> projectileDamage = new Attribute<int>(attributeList);
+            Attribute<int> projectileDamage = new Attribute<int>("Damage", attributeList);
             
             // 4th level
             projectileDamage.NextLevel();

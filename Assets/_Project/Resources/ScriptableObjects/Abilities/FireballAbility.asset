@@ -17,9 +17,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   projectileSpeedAttr:
+    Name: Speed
     attributeList:
-    - 10
-    - 20
+    - 15
+    - 25
     - 30
   projectileDamageAttr:
+    Name: Damage
     attributeList: 0f0000001e0000002300000028000000
