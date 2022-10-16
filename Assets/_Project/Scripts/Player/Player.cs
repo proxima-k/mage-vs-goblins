@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-    private CurrencySystem _currencySystem;
+public class Player : MonoBehaviour, IShopCustomer {
+    [SerializeField] private CurrencySystem _currencySystem;
     private HealthSystem _healthSystem;
 
     [SerializeField] private int _startingCurrency = 100;
@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
         _currencySystem = new CurrencySystem(_startingCurrency);
         _healthSystem = new HealthSystem(_maxHealth);
     }
-    
-    // public void 
+
+    public CurrencySystem GetCurrencySystem() {
+        return _currencySystem;
+    }
 }

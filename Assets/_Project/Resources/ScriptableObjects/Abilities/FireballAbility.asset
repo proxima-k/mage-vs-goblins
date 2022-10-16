@@ -21,7 +21,9 @@ MonoBehaviour:
     attributeList:
     - 15
     - 25
+    - 25
+    - 25
     - 30
   projectileDamageAttr:
     Name: Damage
-    attributeList: 0f0000001e0000002300000028000000
+    attributeList: 0f000000190000001e0000002d00000032000000

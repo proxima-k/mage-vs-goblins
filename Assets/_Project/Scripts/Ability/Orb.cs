@@ -9,10 +9,15 @@ public class Orb : ScriptableObject {
 
     public string OrbName;
     public Sprite Icon;
+    public string Description;
+    
     public Ability AttackAbility;
 
-    public int[] UpgradeCosts = new int[3];
+    [SerializeField] private int[] UpgradeCosts = new int[4];
     private int _currLevelIndex = 0;
+    private bool _isUnlocked = false;
+
+    public int Level => _currLevelIndex;
     // public Ability UltimateAbility;
     
     // Should be used together with UpgradeOrb()
@@ -21,7 +26,6 @@ public class Orb : ScriptableObject {
     }
     
     public bool UpgradeOrb(CurrencySystem currencySystem) {
-        // UpgradeCosts[_currLevelIndex]
         if (currencySystem.Spend(UpgradeCosts[_currLevelIndex])) {
             AttackAbility.UpgradeAbility();
             _currLevelIndex++;
