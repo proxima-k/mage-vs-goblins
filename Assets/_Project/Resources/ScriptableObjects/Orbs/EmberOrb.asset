@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OrbName: Ember
   Icon: {fileID: 0}
+  Description: Fireballs.
   AttackAbility: {fileID: 11400000, guid: f470dbfc1cff27b4d8a18306c5fed8a3, type: 2}
-  UpgradeCosts: 1e0000001e00000028000000
+  UpgradeCosts: 1e0000001e0000002800000032000000

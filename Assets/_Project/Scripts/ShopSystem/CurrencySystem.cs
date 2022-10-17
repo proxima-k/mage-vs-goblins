@@ -7,7 +7,7 @@ public class CurrencySystem {
     
     [SerializeField]private int _currency;
 
-    public event Action OnCurrencySpend;
+    public event Action OnCurrencyChanged;
     
     public CurrencySystem(int currency = 0) {
         _currency = currency;
@@ -15,6 +15,7 @@ public class CurrencySystem {
 
     public void Earn(int amount) {
         _currency += Mathf.Abs(amount);
+        OnCurrencyChanged?.Invoke();
     }
 
     public bool Spend(int amount) {
@@ -24,6 +25,7 @@ public class CurrencySystem {
         
         // enough currency
         _currency -= amount;
+        OnCurrencyChanged?.Invoke();
         return true;
     }
 }

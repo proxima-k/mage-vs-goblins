@@ -26,10 +26,6 @@ public class ShopUI : MonoBehaviour {
         }
     }
 
-    private void Start() {
-        Hide();
-    }
-
     private void CreateCard(Orb orb) {
         // if orb is unlocked
         Transform card = Instantiate(cardPrefab, cardGrid, true);
