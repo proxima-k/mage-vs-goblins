@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3679179810005806052}
   - component: {fileID: 3679179810005806053}
   - component: {fileID: 3679179810005806042}
+  - component: {fileID: -4044894450338288445}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -164,7 +165,29 @@ MonoBehaviour:
     m_Bits: 8
   _maxSpeed: 8
   _maxSteeringForce: 3
-  _chaseTarget: {fileID: 0}
+  _attackTarget: {fileID: 0}
   _directChaseDistance: 10
   _attackDistance: 5
   _attackRate: 1
+--- !u!114 &-4044894450338288445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3679179810005806049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9da81e38ef4304fae32fbc985e68f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minMoveSpeed: 2.66
+  _maxMoveSpeed: 6.82
+  _avoidRadius: 0.99
+  _avoidLayers:
+    serializedVersion: 2
+    m_Bits: 119
+  avoidanceWeight: 1
+  seekWeight: 1
+  _maxSteeringForce: 0.05
+  _lerp: 0.871

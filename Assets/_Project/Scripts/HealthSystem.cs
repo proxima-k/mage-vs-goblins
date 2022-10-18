@@ -9,6 +9,7 @@ public class HealthSystem {
     private int _maxHealth;
 
     public event Action OnDeath;
+    public event Action OnDamage;
     
     public HealthSystem(int health, int? maxHealth = null) {
         _health = health;

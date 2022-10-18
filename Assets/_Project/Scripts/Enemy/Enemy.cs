@@ -6,16 +6,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable {
     [SerializeField] private int _maxHealth = 100; 
     private HealthSystem _healthSystem;
-    private EnemyLocomotion _locomotion;
-
-
+    // private EnemyAI _ai;
+    
     public void Awake() {
         _healthSystem = new HealthSystem(_maxHealth);
         _healthSystem.OnDeath += () => { StartCoroutine(Death()); };
     }
 
     public void Start() {
-        _locomotion = GetComponent<EnemyLocomotion>();
+        // _ai = GetComponent<EnemyAI>();
     }
     
     public void Damage(int damageAmount) {
@@ -27,7 +26,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     public IEnumerator Death() {
         // change this to IEnumerator if implementing a bunch of animation stuff that requires timing
         // blink for a few times
-        _locomotion.SetTarget(null);
+        // _ai.SetTarget(null);
         // disable colliders
         GetComponent<Collider2D>().enabled = false;
 
