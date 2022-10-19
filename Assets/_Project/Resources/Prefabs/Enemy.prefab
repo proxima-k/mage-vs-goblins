@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3679179810005806049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.77, y: 3.89, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -163,10 +163,7 @@ MonoBehaviour:
   _projectileCollisionLayers:
     serializedVersion: 2
     m_Bits: 8
-  _maxSpeed: 8
-  _maxSteeringForce: 3
   _attackTarget: {fileID: 0}
-  _directChaseDistance: 10
   _attackDistance: 5
   _attackRate: 1
 --- !u!114 &-4044894450338288445
@@ -183,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minMoveSpeed: 2.66
   _maxMoveSpeed: 6.82
-  _avoidRadius: 0.99
+  _avoidRadius: 0.8
   _avoidLayers:
     serializedVersion: 2
     m_Bits: 119

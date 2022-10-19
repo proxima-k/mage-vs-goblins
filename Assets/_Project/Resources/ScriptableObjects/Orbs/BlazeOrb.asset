@@ -16,4 +16,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Description: Kill your foes with this ray of flame!
   AttackAbility: {fileID: 11400000, guid: f08dade95d14ca14794dd30e76e06564, type: 2}
-  UpgradeCosts: 00000000000000000000000000000000
+  UpgradeCosts: 14000000320000005000000064000000

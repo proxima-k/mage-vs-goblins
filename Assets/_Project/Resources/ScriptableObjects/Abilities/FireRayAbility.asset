@@ -13,8 +13,27 @@ MonoBehaviour:
   m_Name: FireRayAbility
   m_EditorClassIdentifier: 
   rayTf: {fileID: 9015967881369635174, guid: 54b073c169983334985d332301191ad9, type: 3}
-  rayThickness: 0.33
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 119
   rayDistance: 50
   rayDuration: 1.2
-  damage: 10
-  timeTillNextPulse: 0.3
+  rayWidth:
+    Name: Ray Width
+    attributeList:
+    - 0.3
+    - 0.4
+    - 0.5
+    - 0.6
+    - 0.7
+  damage:
+    Name: Damage
+    attributeList: 0400000005000000060000000700000008000000
+  timeTillNextPulse:
+    Name: Pulse interval
+    attributeList:
+    - 0.5
+    - 0.4
+    - 0.3
+    - 0.25
+    - 0.1

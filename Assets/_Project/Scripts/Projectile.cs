@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour {
                 healthDamageable.Damage(_damage);
                 hasHit = true;
             }
+            CinemachineShake.Instance.ScreenShake(5,0.1f);
             Destroy(gameObject);
         }
     }

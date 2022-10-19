@@ -71,7 +71,7 @@ public class EnemyAI : MonoBehaviour {
     private void Attack() {
         if (_attackTimer <= 0) {
             Vector2 attackDir = (_attackTarget.position - transform.position).normalized;
-            AttackSystem.ShootProjectile(_projectileTf, 0, transform.position, attackDir,10f, _projectileCollisionLayers);
+            AttackSystem.ShootProjectile(_projectileTf, 0, transform.position, attackDir,15f, _projectileCollisionLayers);
             _attackTimer = _attackRate;
         }
     }
