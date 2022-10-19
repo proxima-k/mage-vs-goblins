@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6dc0891eda07145bcd4081a1b6ef0e, type: 3}
   m_Name: FireballAbility
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
+  projectilePrefab: {fileID: 5653966254948766315, guid: 7c0dc01b199f63a48ab25fa5679dbde9, type: 3}
   collisionLayers:
     serializedVersion: 2
     m_Bits: 64
