@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour, IDamageable {
             spriteRenderer.enabled = true;
             yield return new WaitForSeconds(blinkPeriod);
         }
+        
+        LootDropper.Instance.DropCurrency(2, transform.position);
         Destroy(gameObject);
     }
 }

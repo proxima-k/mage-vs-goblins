@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IShopCustomer, IDamageable {
+public class Player : MonoBehaviour, IShopCustomer, IDamageable, IPickuper {
     [SerializeField] private CurrencySystem _currencySystem;
     private HealthSystem _healthSystem;
 
@@ -22,5 +22,9 @@ public class Player : MonoBehaviour, IShopCustomer, IDamageable {
     public void Damage(int damageAmount) {
         // _healthSystem.Damage(damageAmount);
         DamagePopup.Create(damageAmount, transform.position + Vector3.up);
+    }
+
+    public void PickupCurrency(int amount) {
+        _currencySystem.Earn(amount);
     }
 }
