@@ -14,14 +14,12 @@ public class Shop : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha0)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
             // disable player movement
             _shopUI.Show(_shopCustomer);
         }
-        else if (Input.GetKeyDown(KeyCode.Minus))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
             _shopUI.Hide();
             // enable player movement
     }
-    
-    
 }

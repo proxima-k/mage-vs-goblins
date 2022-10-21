@@ -11,6 +11,7 @@ public class FakeHeight : Projectile {
     // vertical position (transform of object)
     [SerializeField] private Transform _bodyTf;
     [SerializeField] private float _gravity = 9.81f;
+    private float _currHeight;
 
     private float _currVelocity;
     public event Action OnGroundHit;

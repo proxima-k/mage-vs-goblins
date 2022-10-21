@@ -1,3 +1,4 @@
+using Proxima_K.Utils;
 using UnityEngine;
 
 public class AttackSystem {
@@ -5,23 +6,18 @@ public class AttackSystem {
         if (collisionLayers == null)
             collisionLayers = ~0;
         
-        Transform fireballInstance = Object.Instantiate(projectileTf, origin, Quaternion.identity);
-
+        // Transform fireballInstance = Object.Instantiate(projectileTf, origin, Quaternion.identity);
+        GameObject fireballInstance = new GameObject(projectileTf.name);
+        
         // projectile properties setup
-        Projectile projectile = fireballInstance.gameObject.AddComponent<Projectile>();
-        projectile.SetDamage(damage);
-        projectile.SetCollisionLayers((LayerMask)collisionLayers);
+        // Projectile projectile = fireballInstance.gameObject.AddComponent<Projectile>();
+        Projectile projectile = fireballInstance.AddComponent<Projectile>();
+        projectile.Setup(projectileTf, origin, damage, (LayerMask)collisionLayers);
+        // projectile.Launch(PK.GetMouseWorldPosition2D(Camera.main), 0.7f);
+        projectile.Launch(targetDir, projectileSpeed);
         
-        // projectile physics setup
-        Rigidbody2D rb2D = fireballInstance.gameObject.AddComponent<Rigidbody2D>();
-        rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb2D.isKinematic = true;
-        // rb2D.gravityScale = 0;
-
-        // add velocity/force towards direction
-        rb2D.velocity = targetDir * projectileSpeed;
-        
-        Object.Destroy(fireballInstance.gameObject,5f);
+        // Object.Destroy(projectile.gameObject,5f);
+        Object.Destroy(fireballInstance, 5f);
     }
 
     public static void ShootRay(int damage, Vector3 origin, Vector3 targetDir, float rayThickness, float rayDistance, LayerMask? collisionLayers=null, bool debugRay=false) {
@@ -38,8 +34,8 @@ public class AttackSystem {
         RaycastHit2D[] hits = Physics2D.BoxCastAll(offsetOrigin, new Vector2(boxLength,rayThickness*2), angle, targetDir, rayDistance-boxLength, (int) collisionLayers);
         
         foreach (var hit in hits) {
-            if(hit.transform.TryGetComponent(out IDamageable healthDamageable))
-                healthDamageable.Damage(damage);
+            if(hit.transform.TryGetComponent(out IDamageable damageable))
+                damageable.Damage(damage);
         }
 
         if (debugRay) {
@@ -57,5 +53,16 @@ public class AttackSystem {
             Debug.DrawLine(upperEnd, lowerEnd, Color.red, 5f);
         }
     }
-}
 
+    public static void CastAOE(int damage, Vector3 origin, float aoeRadius, LayerMask? collisionLayers=null) {
+        if (collisionLayers == null)
+            collisionLayers = ~0;
+
+        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(origin, aoeRadius, (LayerMask)collisionLayers);
+        foreach (var collider2D in collider2Ds) {
+            if (collider2D.transform.TryGetComponent(out IDamageable damageable)) {
+                damageable.Damage(damage);
+            }
+        }
+    }
+}
