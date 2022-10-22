@@ -15,6 +15,7 @@ public class PlayerSkillManager : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(1)) {
+            StartCoroutine(_currOrb.UltimateAbility.TriggerAbility(transform));
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {

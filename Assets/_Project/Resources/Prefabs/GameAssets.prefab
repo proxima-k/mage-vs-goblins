@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePopupPrefab: {fileID: 1537601006079990079, guid: fc408d61d3fc5624cb131cb6d00b6164, type: 3}
   DefaultProjectilePrefab: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
+  FlashAnimationPrefab: {fileID: 3655998834318328023, guid: bcfbcfcf125669c4b98ba83607e87e43, type: 3}

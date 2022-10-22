@@ -13,11 +13,12 @@ public class AttackSystem {
         // Projectile projectile = fireballInstance.gameObject.AddComponent<Projectile>();
         Projectile projectile = fireballInstance.AddComponent<Projectile>();
         projectile.Setup(projectileTf, origin, damage, (LayerMask)collisionLayers);
+        projectile.OnCollision += () => projectile.DestroyProjectile();
         // projectile.Launch(PK.GetMouseWorldPosition2D(Camera.main), 0.7f);
         projectile.Launch(targetDir, projectileSpeed);
         
         // Object.Destroy(projectile.gameObject,5f);
-        Object.Destroy(fireballInstance, 5f);
+        projectile.DestroyProjectile(5f);
     }
 
     public static void ShootRay(int damage, Vector3 origin, Vector3 targetDir, float rayThickness, float rayDistance, LayerMask? collisionLayers=null, bool debugRay=false) {

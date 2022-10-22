@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,11 @@ public class GameAssets : MonoBehaviour {
         }
     }
 
+    private void Awake() {
+        _i = this;
+    }
+
     public Transform DamagePopupPrefab;
     public Transform DefaultProjectilePrefab;
+    public Transform FlashAnimationPrefab;
 }

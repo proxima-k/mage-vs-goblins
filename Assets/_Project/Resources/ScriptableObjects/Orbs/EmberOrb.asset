@@ -16,4 +16,5 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Description: Fireballs.
   AttackAbility: {fileID: 11400000, guid: f470dbfc1cff27b4d8a18306c5fed8a3, type: 2}
+  UltimateAbility: {fileID: 11400000, guid: c102d093190bbcd488716a6f82c8aa62, type: 2}
   UpgradeCosts: 1e0000001e0000002800000032000000

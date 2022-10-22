@@ -1303,8 +1303,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.9538232, b: 0.5613208, a: 1}
-        key1: {r: 0.90588236, g: 0.33783206, b: 0.1764706, a: 1}
+        key0: {r: 0.2971698, g: 1, b: 0.9724812, a: 1}
+        key1: {r: 0.1764706, g: 0.26787958, b: 0.90588236, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4819,7 +4819,7 @@ GameObject:
   - component: {fileID: 8333917654180077738}
   - component: {fileID: 8333917654180077741}
   m_Layer: 0
-  m_Name: body
+  m_Name: Fireball2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4881,7 +4881,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f87ee9508f9c0784383bd4c5772aab9e, type: 3}
-  m_Color: {r: 1, g: 0.9390358, b: 0.4481132, a: 1}
+  m_Color: {r: 0.29803923, g: 1, b: 0.972549, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

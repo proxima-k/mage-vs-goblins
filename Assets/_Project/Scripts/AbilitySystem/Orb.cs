@@ -12,6 +12,7 @@ public class Orb : ScriptableObject {
     public string Description;
     
     public Ability AttackAbility;
+    public Ability UltimateAbility;
 
     [SerializeField] private int[] UpgradeCosts = new int[4];
     private int _currLevelIndex = 0;

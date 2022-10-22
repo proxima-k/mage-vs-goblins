@@ -13,7 +13,7 @@ public class HeightProjectile : Projectile {
 
     public event Action OnGroundHit;
 
-    void Update() {
+    private void Update() {
         _bodyTf.localPosition -= new Vector3(0, _verticalVelocity * Time.deltaTime);
         
         _verticalVelocity += _gravity * Time.deltaTime;
@@ -35,9 +35,5 @@ public class HeightProjectile : Projectile {
         float verticalVelocity = (_height - _gravity * timeToReach * timeToReach * 0.5f) / timeToReach;
         // Debug.Log("Vertical velo" + verticalVelocity);
         _verticalVelocity = verticalVelocity;
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.DrawSphere(transform.position, 0.2f);
     }
 }
