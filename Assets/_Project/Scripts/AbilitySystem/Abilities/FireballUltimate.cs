@@ -12,6 +12,7 @@ public class FireballUltimate : Ability {
     public float radius = 2f;
     public int damage = 10;
     public float damageRadius = 5;
+    public int fireballCount = 6;
     public LayerMask damageLayers;
     
     public override IEnumerator TriggerAbility(Transform abilityCaster) {
@@ -23,14 +24,14 @@ public class FireballUltimate : Ability {
         // select locations
         // create an instance of height projectile
         // instantiate a bunch of them
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < fireballCount; i++) {
 
             GameObject fireballInstance = new GameObject(projectileTf.name);
             HeightProjectile heightProjectile = fireballInstance.AddComponent<HeightProjectile>();
             heightProjectile.Setup(projectileTf, abilityCaster.position, 10, damageLayers);
             heightProjectile.OnGroundHit += () => {
                 Transform explosionInstance = Instantiate(GameAssets.i.FlashAnimationPrefab, heightProjectile.transform.position, Quaternion.Euler(0,0,Random.Range(0, 90))).transform;
-                explosionInstance.localScale *= damageRadius;
+                explosionInstance.localScale *= damageRadius*2;
                 CinemachineShake.Instance.ScreenShake(5, 0.2f);
                 heightProjectile.DestroyProjectile();
                 AttackSystem.CastAOE(damage, heightProjectile.transform.position, damageRadius, damageLayers);
@@ -50,9 +51,10 @@ public class FireballUltimate : Ability {
 
         int angleCounter = 0;
         foreach (var projectile in projectiles) {
-            float rad = TAU * angleCounter / 6;
+            float rad = TAU * angleCounter / fireballCount;
             targetPos = origin + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad))*radius;
             
+            // todo: give this a random time offset
             projectile.Launch(targetPos, timeToReach / 2);
             angleCounter++;
         }

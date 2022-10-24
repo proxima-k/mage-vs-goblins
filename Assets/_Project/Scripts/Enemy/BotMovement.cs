@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Codice.CM.Client.Differences.Graphic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour {
+public class BotMovement : MonoBehaviour {
     private Transform _target;
     [SerializeField] private float _minMoveSpeed = 2f;
     [SerializeField] private float _maxMoveSpeed = 5f;
@@ -18,9 +18,9 @@ public class EnemyMovement : MonoBehaviour {
     [SerializeField] private float seekWeight = 1f;
     
     // steering properties
-    [SerializeField] private float _maxSteeringForce = 5f;
+    [SerializeField] private float _maxSteeringForce = 0.05f;
     [Range(0f,1f)]
-    [SerializeField] private float _lerp = 0.25f;
+    [SerializeField] private float _lerp = 0.8f;
     
     private Rigidbody2D _rb2D;
     
@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour {
             // _rb2D.velocity = desiredVelocity;
         }
         else {
-            _rb2D.velocity = Vector2.zero;
+            // _rb2D.velocity = Vector2.zero;
         }
 
     }
@@ -61,6 +61,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     public void Stop() {
+        _rb2D.velocity = Vector2.zero;
         _target = null;
     }
     
@@ -93,7 +94,8 @@ public class EnemyMovement : MonoBehaviour {
         return Vector3.ClampMagnitude(steeringForce, _maxSteeringForce);
     }
     
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _avoidRadius);
         if (_target != null && _rb2D != null)
             Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb2D.velocity);

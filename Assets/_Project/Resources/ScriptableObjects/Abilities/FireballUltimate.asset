@@ -16,7 +16,8 @@ MonoBehaviour:
   timeToReach: 1
   radius: 5
   damage: 20
-  damageRadius: 5
+  damageRadius: 1.96
+  fireballCount: 10
   damageLayers:
     serializedVersion: 2
     m_Bits: 64

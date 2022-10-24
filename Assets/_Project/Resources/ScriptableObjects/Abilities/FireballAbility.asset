@@ -19,11 +19,11 @@ MonoBehaviour:
   projectileSpeedAttr:
     Name: Speed
     attributeList:
+    - 10
     - 15
-    - 25
-    - 25
-    - 25
-    - 30
+    - 15
+    - 15
+    - 20
   projectileDamageAttr:
     Name: Damage
     attributeList: 0f000000190000001e0000002d00000032000000

@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour {
     }
     private State _state = State.Spawn;
 
-    private EnemyMovement _enemyMovement;
+    private BotMovement _botMovement;
     private Enemy _enemyStats;
     
     // attack stuff
@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour {
     [SerializeField] private float _attackDistance = 5f;
 
     private void Awake() {
-        _enemyMovement = GetComponent<EnemyMovement>();
+        _botMovement = GetComponent<BotMovement>();
     }
 
     private void Update() {
@@ -45,11 +45,11 @@ public class EnemyAI : MonoBehaviour {
         
                 // if within attack distance
                 if (displacement.sqrMagnitude <= _attackDistance * _attackDistance) {
-                    _enemyMovement.Stop();
+                    _botMovement.Stop();
                     Attack();
                 }
                 else {
-                    _enemyMovement.Chase(_attackTarget);
+                    _botMovement.Chase(_attackTarget);
                 }
                 break;
             case State.Death:
@@ -82,7 +82,7 @@ public class EnemyAI : MonoBehaviour {
         // if within attack distance
         if (displacement.sqrMagnitude <= _attackDistance * _attackDistance) {
             _state = State.Attack;
-            _enemyMovement.Stop();
+            _botMovement.Stop();
         }
     }
     

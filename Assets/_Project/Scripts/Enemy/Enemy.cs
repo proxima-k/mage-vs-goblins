@@ -4,26 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable {
-    [SerializeField] private int _maxHealth = 100; 
-    private HealthSystem _healthSystem;
-    // private EnemyAI _ai;
-    
-    public void Awake() {
+    [SerializeField] protected int _maxHealth = 100; 
+    protected HealthSystem _healthSystem;
+    [SerializeField] protected Transform _targetTf;
+    [SerializeField] protected int _currencyDrop;
+
+    protected virtual void Awake() {
         _healthSystem = new HealthSystem(_maxHealth);
+        _healthSystem.OnDamage += () => { };
         _healthSystem.OnDeath += () => { StartCoroutine(Death()); };
     }
 
-    public void Start() {
-        // _ai = GetComponent<EnemyAI>();
-    }
-    
     public void Damage(int damageAmount) {
         _healthSystem.Damage(damageAmount);
         Debug.Log(_healthSystem.Health);
         DamagePopup.Create(damageAmount, transform.position + Vector3.up);
     }
     
-    public IEnumerator Death() {
+    protected virtual IEnumerator Death() {
         // change this to IEnumerator if implementing a bunch of animation stuff that requires timing
         // blink for a few times
         // _ai.SetTarget(null);
@@ -41,7 +39,14 @@ public class Enemy : MonoBehaviour, IDamageable {
             yield return new WaitForSeconds(blinkPeriod);
         }
         
-        LootDropper.Instance.DropCurrency(2, transform.position);
+        if (_currencyDrop > 0)
+            LootDropper.Instance.DropCurrency(_currencyDrop, transform.position);
+        // unsure if this return is needed
+        yield return null;
         Destroy(gameObject);
+    }
+
+    protected virtual void SetTarget(Transform targetTf) {
+        _targetTf = targetTf;
     }
 }

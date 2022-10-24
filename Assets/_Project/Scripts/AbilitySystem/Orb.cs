@@ -19,7 +19,6 @@ public class Orb : ScriptableObject {
     private bool _isUnlocked = false;
 
     public int Level => _currLevelIndex;
-    // public Ability UltimateAbility;
     
     // Should be used together with UpgradeOrb()
     public bool CanUpgrade() {
