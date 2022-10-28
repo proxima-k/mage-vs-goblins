@@ -38,4 +38,11 @@ public class CinemachineShake : MonoBehaviour
         _shakeTimer = time;
     }
 
+    public void ScreenShake(float intensity)
+    {
+        CinemachineBasicMultiChannelPerlin channelPerlin = _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        channelPerlin.m_AmplitudeGain = intensity;
+    }
+
 }

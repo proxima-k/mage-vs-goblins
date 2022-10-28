@@ -23,7 +23,7 @@ public class ShootProjectileAbility : Ability {
         
         Vector3 origin = abilityCaster.position;
         Vector2 targetDir = (PK.GetMouseWorldPosition2D(Camera.main) - (Vector2)origin).normalized;
-        AttackSystem.ShootProjectile(projectilePrefab, projectileDamage, origin, targetDir, projectileSpeed, collisionLayers);
+        AttackUtils.ShootProjectile(projectilePrefab, projectileDamage, origin, targetDir, projectileSpeed, collisionLayers);
 
         yield return null;
         // yield return new WaitForSeconds(abilityCooldown);

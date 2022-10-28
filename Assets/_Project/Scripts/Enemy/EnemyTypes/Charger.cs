@@ -11,7 +11,7 @@ public class Charger : Enemy {
         Death
     }
     private State _state = State.Spawn;
-    private BotMovement _movement;
+    private BotMovement _botMovement;
     private Rigidbody2D _rb2D;
 
     [SerializeField] private float _chargeCooldown = 8f;
@@ -19,13 +19,16 @@ public class Charger : Enemy {
     [SerializeField] private float _chargeSpeed = 8f;
     [SerializeField] private float _pauseBeforeChargeDuration = 1f;
     [SerializeField] private float _chargeDuration = 1f;
+    
+    [Range(0f,1f)]
+    [SerializeField] private float _steerMultiplier = 1f;
 
     private float _chargeTimer;
     // todo: change cooldown check to a coroutine check
 
     protected override void Awake() {
         base.Awake();
-        _movement = GetComponent<BotMovement>();
+        _botMovement = GetComponent<BotMovement>();
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -35,11 +38,10 @@ public class Charger : Enemy {
                 _state = State.Chase;
                 break;
             case State.Chase:
-                _movement.Chase(_targetTf);
+                _botMovement.MoveTowards(_targetTf.position);
                 // if within range, set state to charge
                 if (_chargeTimer <= 0) {
                     if ((_targetTf.position - transform.position).sqrMagnitude <= _attackDistance * _attackDistance) {
-                        _movement.Stop();
                         _state = State.Charge;
                     }
                 }
@@ -64,32 +66,54 @@ public class Charger : Enemy {
     private IEnumerator Charge() {
         // release smoke or blink to indicate about to charge
         // wait for a short period
+        _botMovement.Stop();
         yield return new WaitForSeconds(_pauseBeforeChargeDuration);
-        
-        // get target position
-        // calculate velocity
-        Vector3 chargeDir = (_targetTf.position - transform.position).normalized;
-        // set rigidbody velocity
-        _rb2D.velocity = chargeDir * _chargeSpeed;
-        
-        // todo: make this charging still follow player but adjust the steering 
-        // todo: actually I think i can just change this whole section into just changing the movement properties
-        yield return new WaitForSeconds(_chargeDuration);
-        // wait for seconds(charge duration)
-            // in the meantime, maybe shake the camera or something to show that the mob is charging
-        // set velocity to very low
-        // set state back to chase
-        _rb2D.velocity = chargeDir * 0.5f;
-        yield return new WaitForSeconds(0.5f);
-        _state = State.Chase;
 
+        float initialSteer = _botMovement._maxSteeringForce;
+        _botMovement._maxSteeringForce *= _steerMultiplier;
+        float initialSpeed = _botMovement._maxMoveSpeed;
+        _botMovement._maxMoveSpeed = _chargeSpeed;
+        _botMovement.CanSlow(false);
+        _botMovement.CanAvoid(false);
+        
+        float timer = _chargeDuration;
+        CinemachineShake.Instance.ScreenShake(1f);
+        while (timer > 0) {
+            _botMovement.MoveTowards(_targetTf.position);
+
+            if (_botMovement.TargetIsBehind()) {
+                _botMovement._maxSteeringForce = 0.05f;
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+            timer -= Time.deltaTime;
+        }
+
+        // in the meantime, maybe shake the camera or something to show that the mob is charging
+        
+        // todo: do some math on reducing speed and stuff
+        // while (_botMovement._maxMoveSpeed > initialSpeed) {
+        //     _botMovement._maxMoveSpeed -= Time.deltaTime * 5f;
+        //     yield return new WaitForEndOfFrame();
+        // }
+        // slowly slow down speed?
+        CinemachineShake.Instance.ScreenShake(0f);
+        _botMovement.MoveTowards(transform.position + (Vector3)_rb2D.velocity.normalized * _botMovement._slowRadius * 2);
+        _botMovement.CanSlow(true);
+        yield return new WaitForSeconds(2f); // charger slowing down to rest
+
+        _botMovement._maxMoveSpeed = initialSpeed;
+        _botMovement._maxSteeringForce = initialSteer;
+        _botMovement.CanAvoid(true);
+        _state = State.Chase;
     }
     
     private void OnTriggerEnter2D(Collider2D col) {
         // deal damage to player when charging (use a boolean to check for charging)
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, _attackDistance);
+        Gizmos.DrawLine(transform.position, transform.position+(Vector3)_rb2D.velocity);
     }
 }

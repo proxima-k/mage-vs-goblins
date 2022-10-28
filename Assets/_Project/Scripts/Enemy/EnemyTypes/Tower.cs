@@ -55,7 +55,7 @@ public class Tower : Enemy {
         for (int i = 0; i < _fireCount; i++) {
             float rad = TAU * i / _fireCount + _currentRad;
             Vector3 dir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
-            AttackSystem.ShootProjectile(_projectilePf, _damage, transform.position, dir, 5f, _damageLayers);
+            AttackUtils.ShootProjectile(_projectilePf, _damage, transform.position, dir, 5f, _damageLayers);
         }
     }
 

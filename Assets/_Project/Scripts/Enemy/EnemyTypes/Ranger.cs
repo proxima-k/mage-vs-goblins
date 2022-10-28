@@ -35,8 +35,9 @@ public class Ranger : Enemy {
                 _state = State.Chase;
                 break;
             case State.Chase:
+                // todo: make ranger locate a position around player before shooting
                 // chase player
-                _movement.Chase(_targetTf);
+                _movement.MoveTowards(_targetTf.position);
 
                 if (_attackTimer <= 0) {
                     if ((_targetTf.position - transform.position).sqrMagnitude <= _attackDistance * _attackDistance)
@@ -47,7 +48,7 @@ public class Ranger : Enemy {
                 // attack coroutine
                 if (_attackRoutine == null) {
                     _attackRoutine = StartCoroutine(Attack());
-                    Debug.Log("Attack routine");
+                    // Debug.Log("Attack routine");
                 }
                 break;
             case State.Death:
@@ -64,7 +65,7 @@ public class Ranger : Enemy {
         // animation alerting player
         yield return new WaitForSeconds(1f);
         Vector3 dir = (_targetTf.position - transform.position).normalized;
-        AttackSystem.ShootProjectile(_projectilePf, _damage, transform.position, dir, _projectileSpeed, _damageLayers);
+        AttackUtils.ShootProjectile(_projectilePf, _damage, transform.position, dir, _projectileSpeed, _damageLayers, true);
 
         _attackTimer = _attackCooldown;
         _attackRoutine = null;

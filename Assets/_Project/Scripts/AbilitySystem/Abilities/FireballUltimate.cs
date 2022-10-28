@@ -34,7 +34,7 @@ public class FireballUltimate : Ability {
                 explosionInstance.localScale *= damageRadius*2;
                 CinemachineShake.Instance.ScreenShake(5, 0.2f);
                 heightProjectile.DestroyProjectile();
-                AttackSystem.CastAOE(damage, heightProjectile.transform.position, damageRadius, damageLayers);
+                AttackUtils.CastAOE(damage, heightProjectile.transform.position, damageRadius, damageLayers);
             };
             projectiles.Add(heightProjectile);
         }

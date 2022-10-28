@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         Destroy(gameObject);
     }
 
-    protected virtual void SetTarget(Transform targetTf) {
+    public virtual void SetTarget(Transform targetTf) {
         _targetTf = targetTf;
     }
 }

@@ -1,14 +1,15 @@
 using Proxima_K.Utils;
 using UnityEngine;
 
-public class AttackSystem {
-    public static void ShootProjectile(Transform projectileTf, int damage, Vector3 origin, Vector3 targetDir, float projectileSpeed, LayerMask? collisionLayers=null) {
+public class AttackUtils {
+    public static void ShootProjectile(Transform projectileTf, int damage, Vector3 origin, Vector3 targetDir, float projectileSpeed, LayerMask? collisionLayers=null, bool rotateProjectile = false) {
         if (collisionLayers == null)
             collisionLayers = ~0;
         
         // Transform fireballInstance = Object.Instantiate(projectileTf, origin, Quaternion.identity);
         GameObject fireballInstance = new GameObject(projectileTf.name);
-        
+        if (rotateProjectile)
+            fireballInstance.transform.right = targetDir;
         // projectile properties setup
         // Projectile projectile = fireballInstance.gameObject.AddComponent<Projectile>();
         Projectile projectile = fireballInstance.AddComponent<Projectile>();

@@ -5,31 +5,39 @@ using Codice.CM.Client.Differences.Graphic;
 using UnityEngine;
 
 public class BotMovement : MonoBehaviour {
-    private Transform _target;
-    [SerializeField] private float _minMoveSpeed = 2f;
-    [SerializeField] private float _maxMoveSpeed = 5f;
+    
+    public float _minMoveSpeed = 2f;
+    public float _maxMoveSpeed = 5f;
     
     // avoidance behavior properties
-    [SerializeField] private float _avoidRadius = 1f;
-    [SerializeField] private LayerMask _avoidLayers;
+    public float _avoidRadius = 1f;
+    public LayerMask _avoidLayers;
 
     // weighted variables
-    [SerializeField] private float avoidanceWeight = 1f;
-    [SerializeField] private float seekWeight = 1f;
+    public float avoidanceWeight = 1f;
+    public float seekWeight = 1f;
     
     // steering properties
-    [SerializeField] private float _maxSteeringForce = 0.05f;
+    public float _maxSteeringForce = 0.05f;
     [Range(0f,1f)]
-    [SerializeField] private float _lerp = 0.8f;
+    public float _lerp = 0.8f;
+
+    public float _slowRadius = 1f;
     
     private Rigidbody2D _rb2D;
+    private Vector3 _targetPos;
+    private bool _canMove;
+    private bool _canSlow = true;
+    private bool _canAvoid = true;
+    public void CanSlow(bool canSlow) => _canSlow = canSlow;
+    public void CanAvoid(bool canAvoid) => _canAvoid = canAvoid;
     
     private void Awake() {
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
     void Update() {
-        if (_target != null) {
+        if (_canMove) {
             // get a desired velocity
             // get current velocity
             // get a steering force
@@ -46,29 +54,40 @@ public class BotMovement : MonoBehaviour {
             // unable to use Vector2.ClampMagnitude since it only clamps the max magnitude
             float speed = Mathf.Clamp(desiredVelocity.magnitude, _minMoveSpeed, _maxMoveSpeed);
             desiredVelocity = desiredVelocity.normalized * speed;
+            
+            // if position is close to target, then slow down
+            
+            if (_canSlow && (_targetPos - transform.position).sqrMagnitude < _slowRadius * _slowRadius)
+                desiredVelocity *= (_targetPos - transform.position).magnitude / _slowRadius;
 
             _rb2D.velocity = Vector2.Lerp(_rb2D.velocity, desiredVelocity, _lerp);
             // _rb2D.velocity = desiredVelocity;
         }
-        else {
-            // _rb2D.velocity = Vector2.zero;
-        }
-
     }
 
-    public void Chase(Transform target) {
-        _target = target;
+    public void MoveTowards(Vector3 position) {
+        _canMove = true;
+        _targetPos = position;
     }
-
+    
     public void Stop() {
+        _canMove = false;
         _rb2D.velocity = Vector2.zero;
-        _target = null;
+    }
+
+    // gets a float based on the dot product of current direction and direction towards target
+    // this is to see if the value is positive or negative.
+    public bool TargetIsBehind() {
+        Vector3 towardsTargetDir = _targetPos - transform.position;
+        return Vector3.Dot(towardsTargetDir.normalized, _rb2D.velocity.normalized) < 0;
     }
     
     // returns the most desirable direction base on adding target seeking and obstacle avoiding directions
     private Vector3 GetDesiredDirection() {
-        Vector2 seekDir = (_target.position - transform.position).normalized * seekWeight;
-        Vector2 avoidDir = GetAvoidanceVector() * avoidanceWeight;
+        Vector2 seekDir = (_targetPos - transform.position).normalized * seekWeight;
+        Vector2 avoidDir = Vector2.zero;
+        if (_canAvoid)
+            avoidDir = GetAvoidanceVector() * avoidanceWeight;
 
         Vector2 desiredDir = (seekDir + avoidDir).normalized;
         
@@ -97,7 +116,9 @@ public class BotMovement : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _avoidRadius);
-        if (_target != null && _rb2D != null)
-            Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb2D.velocity);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(_targetPos, _slowRadius);
+        // if (_target != null && _rb2D != null)
+        //     Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb2D.velocity);
     }
 }

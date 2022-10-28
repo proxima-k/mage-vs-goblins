@@ -33,7 +33,7 @@ public class Builder : Enemy {
                 // perhaps take cover if it has a tower
                 // if builder doesn't have a tower, then run away from player
                 if (_targetTf != null) {
-                    _movement.Chase(_targetTf);
+                    _movement.MoveTowards(_targetTf.position);
                 }
                 else {
                     _movement.Stop();

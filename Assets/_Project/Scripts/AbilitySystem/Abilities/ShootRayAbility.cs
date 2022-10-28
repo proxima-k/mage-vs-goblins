@@ -40,7 +40,7 @@ public class ShootRayAbility : Ability {
             rayInstance.right = targetDir;
             
             if (damageTimer <= 0) {
-                AttackSystem.ShootRay(damage.Value, abilityCaster.position, targetDir, rayWidth.Value, rayDistance, debugRay:true, collisionLayers:damageLayers);
+                AttackUtils.ShootRay(damage.Value, abilityCaster.position, targetDir, rayWidth.Value, rayDistance, debugRay:true, collisionLayers:damageLayers);
                 damageTimer = timeTillNextPulse.Value;
             }
             else {
