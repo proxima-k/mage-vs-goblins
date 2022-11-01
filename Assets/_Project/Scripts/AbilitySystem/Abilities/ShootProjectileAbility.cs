@@ -39,4 +39,9 @@ public class ShootProjectileAbility : Ability {
         projectileSpeedAttr.ResetLevel();
         projectileDamageAttr.ResetLevel();
     }
+
+    public override string GetAttributesInfo() {
+        return $"Damage: {projectileDamage} (+{projectileDamageAttr.GetNextLevelValue()-projectileDamage})\n" +
+               $"Speed: {projectileSpeed} (+{projectileSpeedAttr.GetNextLevelValue()-projectileSpeed})";
+    }
 }

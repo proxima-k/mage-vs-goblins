@@ -16,7 +16,7 @@ public class Orb : ScriptableObject {
 
     [SerializeField] private int[] UpgradeCosts = new int[4];
     private int _currLevelIndex = 0;
-    private bool _isUnlocked = false;
+    // private bool _isUnlocked = false;
 
     public int Level => _currLevelIndex;
     
@@ -38,5 +38,12 @@ public class Orb : ScriptableObject {
     public void ResetOrbLevel() {
         AttackAbility.ResetAbilityLevel();
         _currLevelIndex = 0;
+    }
+
+    public string GetOrbInfo() {
+        return
+            Description + "\n" +
+            AttackAbility.GetAttributesInfo() + "\n" +
+            UltimateAbility.GetAttributesInfo();
     }
 }

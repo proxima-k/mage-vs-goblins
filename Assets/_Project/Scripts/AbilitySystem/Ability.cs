@@ -18,5 +18,9 @@ namespace AbilitySystem {
 
         public virtual void ResetAbilityLevel() {
         }
+
+        public virtual string GetAttributesInfo() {
+            return "";
+        }
     }
 }

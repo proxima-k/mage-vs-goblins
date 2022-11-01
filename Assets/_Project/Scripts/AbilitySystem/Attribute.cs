@@ -36,10 +36,10 @@ namespace AbilitySystem {
             _levelIndex = 0;
         }
 
-        public string GetStringForLevelDifference() {
+        public T GetNextLevelValue() {
             if (_levelIndex < attributeList.Count - 1)
-                return attributeList[_levelIndex + 1].ToString();
-            return "Maxed";
+                return attributeList[_levelIndex + 1];
+            return attributeList[_levelIndex];
         }
     }
 }
