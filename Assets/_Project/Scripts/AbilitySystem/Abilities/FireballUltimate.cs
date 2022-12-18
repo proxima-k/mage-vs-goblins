@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AbilitySystem;
-using Proxima_K.Utils;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "AbilitySystem/Fireball Ultimate Ability")]
@@ -15,7 +15,7 @@ public class FireballUltimate : Ability {
     public int fireballCount = 6;
     public LayerMask damageLayers;
     
-    public override IEnumerator TriggerAbility(Transform abilityCaster) {
+    public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
         Vector3 targetPos = Vector3.zero;
         Vector3 origin = abilityCaster.position;
         

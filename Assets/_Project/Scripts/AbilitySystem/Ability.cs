@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,8 +7,9 @@ namespace AbilitySystem {
         // public float abilityCooldown = 1f;
         // protected bool canCastAbility = true;
 
-        public virtual IEnumerator TriggerAbility(Transform abilityCaster) {
+        public virtual IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
             yield return null;
+            callback?.Invoke();
         }
 
         public virtual void CancelAbility() {

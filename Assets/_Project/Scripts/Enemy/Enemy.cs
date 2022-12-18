@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeField] protected Transform _targetTf;
     [SerializeField] protected int _currencyDrop;
 
+    // for state checks use
+    protected Coroutine _currentRoutine;
+
     protected virtual void Awake() {
         _healthSystem = new HealthSystem(_maxHealth);
         _healthSystem.OnDamage += () => { };

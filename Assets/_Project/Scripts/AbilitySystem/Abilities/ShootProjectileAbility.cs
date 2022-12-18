@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using AbilitySystem;
 using Proxima_K.Utils;
-using UnityEditor;
 
 [CreateAssetMenu(menuName = "AbilitySystem/Shoot Projectile Ability")]
 public class ShootProjectileAbility : Ability {
@@ -16,7 +15,7 @@ public class ShootProjectileAbility : Ability {
     public Attribute<int> projectileDamageAttr;
     private int projectileDamage=> projectileDamageAttr.Value;
 
-    public override IEnumerator TriggerAbility(Transform abilityCaster) {
+    public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
         // canCastAbility = false;
         if (projectilePrefab == null)
             projectilePrefab = GameAssets.i.DefaultProjectilePrefab;

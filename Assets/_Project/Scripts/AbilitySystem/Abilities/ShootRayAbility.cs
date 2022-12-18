@@ -18,7 +18,7 @@ public class ShootRayAbility : Ability {
     public Attribute<int> damage = new Attribute<int>("Damage", new List<int>{5});
     public Attribute<float> timeTillNextPulse = new Attribute<float>("Pulse interval",new List<float>{0.5f});
 
-    public override IEnumerator TriggerAbility(Transform abilityCaster) {
+    public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
         float timer = rayDuration;
         float damageTimer = 0;
         PlayerLocomotion playerLocomotion = abilityCaster.GetComponent<PlayerLocomotion>();
