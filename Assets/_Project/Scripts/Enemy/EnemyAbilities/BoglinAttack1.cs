@@ -7,10 +7,10 @@ using UnityEngine;
 public class BoglinAttack1 : Ability {
     public Transform _projectilePf;
     
-    public float _atk1Duration = 10f;
-    public float _atk1Pause = .3f;
-    public int _atk1Damage = 15; 
-    public int _atk1ProjectilePerPulse = 2;
+    public float _atkDuration = 10f;
+    public float _atkPause = .3f;
+    public int _atkDamage = 15; 
+    public int _atkProjectilePerPulse = 2;
     public float _rotateSpeed = 10f;
     public LayerMask _damageLayers;
     
@@ -18,7 +18,7 @@ public class BoglinAttack1 : Ability {
 
     public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
         Debug.Log("Attack 1");
-        float timer = _atk1Duration;
+        float timer = _atkDuration;
         // abilityCaster.position += Vector3.right * 3f;
         
         // move to a location
@@ -31,13 +31,13 @@ public class BoglinAttack1 : Ability {
         while (timer > 0) {
             // loop through fire count, and shoot projectile
             if (pauseTimer <= 0) {
-                for (int i = 0; i < _atk1ProjectilePerPulse; i++) {
-                    _desiredRad = rad + TAU * i / _atk1ProjectilePerPulse;
+                for (int i = 0; i < _atkProjectilePerPulse; i++) {
+                    _desiredRad = rad + TAU * i / _atkProjectilePerPulse;
                     dir = new Vector3(Mathf.Cos(_desiredRad), Mathf.Sin(_desiredRad));
-                    AttackUtils.ShootProjectile(_projectilePf, _atk1Damage, abilityCaster.position, dir, 5f, _damageLayers, true);
+                    AttackUtils.ShootProjectile(_projectilePf, _atkDamage, abilityCaster.position, dir, 5f, _damageLayers, true);
                 }
 
-                pauseTimer = _atk1Pause;
+                pauseTimer = _atkPause;
             }
             else {
                 pauseTimer -= Time.deltaTime;
@@ -47,7 +47,7 @@ public class BoglinAttack1 : Ability {
             timer -= Time.deltaTime;
             rad += Time.deltaTime * _rotateSpeed;
         }
-        yield return new WaitForSeconds(_atk1Pause);
+        yield return new WaitForSeconds(_atkPause);
         callback?.Invoke();
     }
 }

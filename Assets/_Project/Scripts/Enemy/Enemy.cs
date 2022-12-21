@@ -52,4 +52,8 @@ public class Enemy : MonoBehaviour, IDamageable {
     public virtual void SetTarget(Transform targetTf) {
         _targetTf = targetTf;
     }
+
+    public Transform GetTarget() {
+        return _targetTf;
+    }
 }

@@ -1009,10 +1009,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 5000
-  _targetTf: {fileID: 0}
+  _targetTf: {fileID: 1980546841}
   _currencyDrop: 0
   _attack1: {fileID: 11400000, guid: 08ba849858bc8e24eaac0949a9395314, type: 2}
-  _processDuration: 5
+  _attack2: {fileID: 11400000, guid: 59358a1bb983282469822e4c3f305ae9, type: 2}
+  _processDuration: 3
 --- !u!114 &652701668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2307,7 +2308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1078751354
 RectTransform:
   m_ObjectHideFlags: 0

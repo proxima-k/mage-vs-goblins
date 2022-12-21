@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BoglinAttack1
   m_EditorClassIdentifier: 
   _projectilePf: {fileID: 4063976155592968522, guid: 17a1cb27c706c1d4cb40644e786dfc36, type: 3}
-  _atk1Duration: 10
-  _atk1Pause: 0.1
-  _atk1Damage: 15
-  _atk1ProjectilePerPulse: 4
+  _atkDuration: 8
+  _atkPause: 0.15
+  _atkDamage: 15
+  _atkProjectilePerPulse: 3
   _rotateSpeed: 2
   _damageLayers:
     serializedVersion: 2

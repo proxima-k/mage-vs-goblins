@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca165eeedfe8984d84ef56903a18bd4, type: 3}
   m_Name: BoglinAttack2
   m_EditorClassIdentifier: 
-  _projectilePf: {fileID: 0}
+  _projectilePf: {fileID: 4063976155592968522, guid: 17a1cb27c706c1d4cb40644e786dfc36, type: 3}
+  _atkDmg1: 10
+  _projSpeed1: 15
+  _atkDmg2: 15
+  _projSpeed2: 15
+  spread: 0.57
+  _projCount: 14
+  _damageLayers:
+    serializedVersion: 2
+    m_Bits: 0

@@ -12,7 +12,7 @@ public class Boglin : Enemy {
         Process,
         Attack1,    // circular projectile
         Attack2,    // target projectile
-        Attack3,    // height projectiles / jump itself?
+        // Attack3,    // height projectiles / jump itself?
         Healing,    // spawn towers that heal boss after a time, also spawn enemies to distract players
         Death       // drop a skull 
     }
@@ -21,10 +21,11 @@ public class Boglin : Enemy {
 
     // attack abilities
     [SerializeField] private BoglinAttack1 _attack1;
+    [SerializeField] private BoglinAttack2 _attack2;
 
 
     // processing/decision making properties
-    [SerializeField] private float _processDuration = 5f;
+    [SerializeField] private float _processDuration = 3f;
     private float _processTimer;
     
     protected override void Awake() {
@@ -45,28 +46,20 @@ public class Boglin : Enemy {
                 else { // DECISION MAKING
                     // when health has been damage for an amount, go into healing state.
                     // otherwise random between attacks
-                    // _state = (State)Random.Range(2, 5);
-                    _state = State.Attack1;
+                    _state = (State)Random.Range(3, 4);
+                    // _state = State.Attack1;
                     _processTimer = _processDuration;
                 }
                 break;
             case State.Attack1:
                 if (_currentRoutine == null)
                     _currentRoutine = StartCoroutine(
-                        _attack1.TriggerAbility(transform, 
-                            () => {
-                                    _currentRoutine = null;
-                                    _state = State.Process;
-                                }
-                            ));
+                        _attack1.TriggerAbility(transform, ChangeToProcessState));
                 break;
             case State.Attack2:
                 if (_currentRoutine == null)
-                    _currentRoutine = StartCoroutine(_attack1.TriggerAbility(transform));
-                break;
-            case State.Attack3:
-                if (_currentRoutine == null)
-                    _currentRoutine = StartCoroutine(_attack1.TriggerAbility(transform));
+                    _currentRoutine = StartCoroutine(
+                        _attack2.TriggerAbility(transform, ChangeToProcessState));
                 break;
             case State.Healing:
                 break;
@@ -75,5 +68,8 @@ public class Boglin : Enemy {
         }
     }
 
-    
+    private void ChangeToProcessState() {
+        _currentRoutine = null;
+        _state = State.Process;
+    }
 }
