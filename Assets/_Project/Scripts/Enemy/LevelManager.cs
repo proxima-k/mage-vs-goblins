@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Object = System.Object;
 using Random = UnityEngine.Random;
 
-[ExecuteInEditMode]
-public class EnemySpawner : MonoBehaviour {
+public class LevelManager : MonoBehaviour {
     [SerializeField] private Transform _playerTf;
     [SerializeField] private Rect spawnField = new Rect(Vector2.zero, Vector2.one);
     // array of waves
@@ -13,42 +13,52 @@ public class EnemySpawner : MonoBehaviour {
 
     [Header("Level Layout")]
     [SerializeField] private Level[] _levels;
-    private Coroutine _currentWave;
-    private int _currentWaveEnemyCount = 0;
-    private int _currentLevel = -1;
+    private Coroutine _gameCoroutine;
+    private int _currentEnemyCount = 0;
 
+    private void Start() {
+        _gameCoroutine = StartCoroutine(StartGame());
+    }
 
     public IEnumerator StartGame() {
-        _currentLevel++;
-        if (_currentWaveEnemyCount <= 0) {
-            foreach (var wave in _levels[_currentLevel].Waves) {
-                if (wave.StartWaveType == EnemyWave.WaitType.Time) {
+        // level iteration
+        foreach (var level in _levels) {
+            while (_currentEnemyCount > 0) {
+                yield return null;
+            }
+            foreach (var wave in level.Waves) {
+                    // checking wave type
+                    if (wave.WaitForPreviousEnemiesAreDead)
+                        while (_currentEnemyCount > 0) { yield return null; }
+                    
                     yield return new WaitForSeconds(wave.SpawnAfterSeconds);
                     
-                }
-                else {
-                    
-                }
+                    // spawning enemies after the wait type has ended
+                    SpawnEnemies(_enemyTypes[wave.EnemyIndex], wave.SpawnAmount);
             }
-            // iterate through all waves
-            // wait for seconds if required
         }
 
         yield return null;
     }
+
+    public void StopWave() {
+        StopCoroutine(_gameCoroutine);
+    }
     
-    public void NextWave() {
-        if (_currentWaveEnemyCount <= 0) {
-            // spawn next wave
+    public void SpawnEnemies(Transform enemyType, int enemyCount) {
+        for (int i = 0; i < enemyCount; i++) {
+            Vector3 spawnPos = new Vector3(
+                Random.Range(spawnField.size.x / -2, spawnField.size.x / 2),
+                Random.Range(spawnField.size.y / -2, spawnField.size.y / 2));
+            Enemy newEnemy = Instantiate(enemyType, spawnPos, Quaternion.identity).GetComponent<Enemy>();
+            newEnemy.SetTarget(_playerTf);
+            _currentEnemyCount++;
+            newEnemy.OnEnemyDeath += EnemyDied;
         }
     }
 
-    public void StopWave() {
-        StopCoroutine(_currentWave);
-    }
-
     private void EnemyDied() {
-        _currentWaveEnemyCount--;
+        _currentEnemyCount--;
     }
     
     private void OnDrawGizmos() {
@@ -58,28 +68,22 @@ public class EnemySpawner : MonoBehaviour {
 
 [Serializable]
 public class Level {
+    [SerializeField] private string LevelLabel;
     [SerializeField] private EnemyWave[] _waves;
+    
     public EnemyWave[] Waves => _waves;
 }
 
 [Serializable]
 public class EnemyWave {
-    public enum WaitType {
-        Time,
-        AllPreviousEnemyDead
-    }
 
-    [SerializeField] private WaitType _startWaveType;
+    [SerializeField] private bool _waitForPreviousEnemiesAreDead;
     [SerializeField] private int _enemyIndex;
     [SerializeField] private float _spawnAfterSeconds;
     [SerializeField] private int _spawnAmount;
 
-    public WaitType StartWaveType => _startWaveType;
+    public bool WaitForPreviousEnemiesAreDead => _waitForPreviousEnemiesAreDead;
     public int EnemyIndex => _enemyIndex;
     public float SpawnAfterSeconds => _spawnAfterSeconds;
     public int SpawnAmount => _spawnAmount;
-
-    public IEnumerator StartWave() {
-        
-    }
 }

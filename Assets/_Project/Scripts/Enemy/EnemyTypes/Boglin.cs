@@ -66,7 +66,9 @@ public class Boglin : Enemy {
             case State.Death:
                 break;
         }
+        
     }
+    
 
     private void ChangeToProcessState() {
         _currentRoutine = null;

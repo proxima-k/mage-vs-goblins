@@ -45,7 +45,6 @@ public class Charger : Enemy {
                         _state = State.Charge;
                     }
                 }
-                
                 // todo: during cooldown, maybe lower the movement speed to allow player to breath
                 break;
             case State.Charge:

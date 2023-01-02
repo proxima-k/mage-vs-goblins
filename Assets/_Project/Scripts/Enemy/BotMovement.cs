@@ -31,9 +31,13 @@ public class BotMovement : MonoBehaviour {
     private bool _canAvoid = true;
     public void CanSlow(bool canSlow) => _canSlow = canSlow;
     public void CanAvoid(bool canAvoid) => _canAvoid = canAvoid;
+
+    private SpriteRenderer _spriteRenderer;
+    public bool flipSprite;
     
     private void Awake() {
         _rb2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update() {
@@ -62,6 +66,7 @@ public class BotMovement : MonoBehaviour {
 
             _rb2D.velocity = Vector2.Lerp(_rb2D.velocity, desiredVelocity, _lerp);
             // _rb2D.velocity = desiredVelocity;
+            UpdateFacingDirection();
         }
     }
 
@@ -111,6 +116,10 @@ public class BotMovement : MonoBehaviour {
     private Vector3 SteerTowards(Vector3 currentVelocity, Vector3 desiredDir) {
         Vector3 steeringForce = desiredDir * _maxMoveSpeed - currentVelocity;
         return Vector3.ClampMagnitude(steeringForce, _maxSteeringForce);
+    }
+
+    private void UpdateFacingDirection() {
+        _spriteRenderer.flipX = _rb2D.velocity.x > 0 ? !flipSprite : flipSprite;
     }
     
     private void OnDrawGizmosSelected() {

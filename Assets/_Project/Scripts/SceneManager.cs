@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour {
-    private static LevelManager _instance;
+public class SceneManager : MonoBehaviour {
+    private static SceneManager _instance;
 
-    public static LevelManager Instance {
+    public static SceneManager Instance {
         get {
             if (_instance == null) {
                 GameObject gameObj = new GameObject();
-                _instance = gameObj.AddComponent<LevelManager>();
+                _instance = gameObj.AddComponent<SceneManager>();
             }
 
             return _instance;
@@ -20,11 +20,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     public static void ChangeScene(int index) {
-        SceneManager.LoadScene(index);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(index);
     }
 
     public static void ChangeScene(string sceneName) {
-        SceneManager.LoadScene(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     public static void QuitGame() {

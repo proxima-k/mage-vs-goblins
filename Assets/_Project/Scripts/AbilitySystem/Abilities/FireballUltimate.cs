@@ -28,7 +28,7 @@ public class FireballUltimate : Ability {
 
             GameObject fireballInstance = new GameObject(projectileTf.name);
             HeightProjectile heightProjectile = fireballInstance.AddComponent<HeightProjectile>();
-            heightProjectile.Setup(projectileTf, abilityCaster.position, 10, damageLayers);
+            heightProjectile.Setup(projectileTf, abilityCaster.position, 10, 0);
             heightProjectile.OnGroundHit += () => {
                 Transform explosionInstance = Instantiate(GameAssets.i.FlashAnimationPrefab, heightProjectile.transform.position, Quaternion.Euler(0,0,Random.Range(0, 90))).transform;
                 explosionInstance.localScale *= damageRadius*2;
