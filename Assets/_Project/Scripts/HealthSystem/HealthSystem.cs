@@ -4,6 +4,7 @@ using UnityEngine;
 public class HealthSystem {
     public int Health => _health;
     public int MaxHealth => _maxHealth;
+    public float HealthPercentage => (float)_health / _maxHealth;
     
     private int _health;
     private int _maxHealth;
@@ -26,6 +27,7 @@ public class HealthSystem {
 
     public void Damage(int amount) {
         _health -= Mathf.Abs(amount);
+        OnDamage?.Invoke();
         if (_health <= 0) {
             _health = 0;
             OnDeath?.Invoke();
