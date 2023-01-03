@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeField] protected int _maxHealth = 100; 
     protected HealthSystem _healthSystem;
     [SerializeField] protected Transform _targetTf;
-    [SerializeField] protected int _currencyDrop;
+    [SerializeField] protected int _currencyDrop = 2;
     [SerializeField] protected bool _flipSprite;
 
     private Material _healthBarMat;

@@ -14,6 +14,10 @@ public class Charger : Enemy {
     private BotMovement _botMovement;
     private Rigidbody2D _rb2D;
 
+    [SerializeField] private int _chargeDamage = 8;
+    [SerializeField] private LayerMask _damageLayers;
+    [SerializeField] private Vector2 _boxColliderSize = Vector2.one;
+    
     [SerializeField] private float _chargeCooldown = 8f;
     [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private float _chargeSpeed = 8f;
@@ -24,7 +28,7 @@ public class Charger : Enemy {
     [SerializeField] private float _steerMultiplier = 1f;
 
     private float _chargeTimer;
-    // todo: change cooldown check to a coroutine check
+    private bool _hasHitPlayer = true;
 
     protected override void Awake() {
         base.Awake();
@@ -45,7 +49,6 @@ public class Charger : Enemy {
                         _state = State.Charge;
                     }
                 }
-                // todo: during cooldown, maybe lower the movement speed to allow player to breath
                 break;
             case State.Charge:
                 // perhaps merge the coroutine to the distance checking and let this state be empty or something.
@@ -58,6 +61,8 @@ public class Charger : Enemy {
                 break;
         }
 
+        ChargingCollisionCheck();
+        
         if (_state != State.Charge && _chargeTimer > 0)
             _chargeTimer -= Time.deltaTime;
     }
@@ -74,6 +79,8 @@ public class Charger : Enemy {
         _botMovement._maxMoveSpeed = _chargeSpeed;
         _botMovement.CanSlow(false);
         _botMovement.CanAvoid(false);
+
+        _hasHitPlayer = false;
         
         float timer = _chargeDuration;
         CinemachineShake.Instance.ScreenShake(1f);
@@ -107,9 +114,16 @@ public class Charger : Enemy {
         _state = State.Chase;
     }
     
-    private void OnTriggerEnter2D(Collider2D col) {
-        // deal damage to player when charging (use a boolean to check for charging)
+    private void ChargingCollisionCheck() {
+        if (_state != State.Charge || _hasHitPlayer) return;
+        Collider2D col = Physics2D.OverlapBox(transform.position, _boxColliderSize, 0, _damageLayers);
+        if (col != null && col.TryGetComponent(out IDamageable healthDamageable)) {
+            Debug.Log($"Collide with {col.name}");
+            healthDamageable.Damage(_chargeDamage);
+            _hasHitPlayer = true;
+        }
     }
+    
 
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, _attackDistance);
