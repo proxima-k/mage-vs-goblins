@@ -23,6 +23,7 @@ public class BoglinAttack2 : Ability {
     
     public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
         Debug.Log("Attack 2");
+        DangerMarkPopup.Create(abilityCaster.position);
         Transform targetTf = abilityCaster.GetComponent<Enemy>().GetTarget();
         
         // PHASE 1: launch 2 individual projectile

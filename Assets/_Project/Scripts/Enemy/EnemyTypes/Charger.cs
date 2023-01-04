@@ -71,6 +71,10 @@ public class Charger : Enemy {
         // release smoke or blink to indicate about to charge
         // wait for a short period
         _botMovement.Stop();
+        // Transform damageMarkPopupTf = DamageMarkPopup.Create(transform.position).transform;
+        // damageMarkPopupTf.SetParent(transform);
+        DangerMarkPopup.Create(transform.position);
+        
         yield return new WaitForSeconds(_pauseBeforeChargeDuration);
 
         float initialSteer = _botMovement._maxSteeringForce;
@@ -83,7 +87,7 @@ public class Charger : Enemy {
         _hasHitPlayer = false;
         
         float timer = _chargeDuration;
-        CinemachineShake.Instance.ScreenShake(1f);
+        CinemachineShake.Instance.ScreenShake(1f, _chargeDuration);
         while (timer > 0) {
             _botMovement.MoveTowards(_targetTf.position);
 
@@ -94,16 +98,7 @@ public class Charger : Enemy {
             yield return new WaitForEndOfFrame();
             timer -= Time.deltaTime;
         }
-
-        // in the meantime, maybe shake the camera or something to show that the mob is charging
         
-        // todo: do some math on reducing speed and stuff
-        // while (_botMovement._maxMoveSpeed > initialSpeed) {
-        //     _botMovement._maxMoveSpeed -= Time.deltaTime * 5f;
-        //     yield return new WaitForEndOfFrame();
-        // }
-        // slowly slow down speed?
-        CinemachineShake.Instance.ScreenShake(0f);
         _botMovement.MoveTowards(transform.position + (Vector3)_rb2D.velocity.normalized * _botMovement._slowRadius * 2);
         _botMovement.CanSlow(true);
         yield return new WaitForSeconds(2f); // charger slowing down to rest
@@ -127,6 +122,6 @@ public class Charger : Enemy {
 
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, _attackDistance);
-        Gizmos.DrawLine(transform.position, transform.position+(Vector3)_rb2D.velocity);
+        // Gizmos.DrawLine(transform.position, transform.position+(Vector3)_rb2D.velocity);
     }
 }

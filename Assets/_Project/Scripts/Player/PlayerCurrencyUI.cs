@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Plastic.Newtonsoft.Json.Converters;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class PlayerCurrencyUI : MonoBehaviour {
     [SerializeField] private Player _player;

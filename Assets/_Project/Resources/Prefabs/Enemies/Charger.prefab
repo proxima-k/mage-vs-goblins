@@ -155,7 +155,7 @@ MonoBehaviour:
   avoidanceWeight: 1
   seekWeight: 1
   _maxSteeringForce: 0.1
-  _lerp: 0.877
+  _lerp: 0.66
   _slowRadius: 2.1
   flipSprite: 0
 --- !u!114 &4179775421179812023
@@ -178,13 +178,13 @@ MonoBehaviour:
   _damageLayers:
     serializedVersion: 2
     m_Bits: 8
-  _boxColliderSize: {x: 1, y: 1}
+  _boxColliderSize: {x: 0.875, y: 0.75}
   _chargeCooldown: 3
   _attackDistance: 3.64
-  _chargeSpeed: 10
+  _chargeSpeed: 9
   _pauseBeforeChargeDuration: 0.75
   _chargeDuration: 1.25
-  _steerMultiplier: 0.8
+  _steerMultiplier: 0.402
 --- !u!1001 &6225418602141493147
 PrefabInstance:
   m_ObjectHideFlags: 0

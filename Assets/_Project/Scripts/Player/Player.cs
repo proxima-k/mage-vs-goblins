@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
@@ -15,15 +12,21 @@ public class Player : MonoBehaviour, IShopCustomer, IDamageable, IPickuper {
     [SerializeField] private Image _healthBar;
     private Material _healthBarMat;
     [SerializeField] private TextMeshProUGUI _healthText;
+
+    [SerializeField] private GameObject DeathUI;
     
     private void Awake() {
         _healthBarMat = _healthBar.material;
         _currencySystem = new CurrencySystem(_startingCurrency);
         _healthSystem = new HealthSystem(_maxHealth);
         _healthSystem.OnDamage += UpdateHealthBar;
-        // trigger game over scene
-        // _healthSystem.OnDeath += () => { };
+
         UpdateHealthBar();
+        // trigger game over scene
+        _healthSystem.OnDeath += () => {
+            PlayerInputManager.I.SetPlayerInput(false);
+            DeathUI.SetActive(true);
+        };
     }
 
     public CurrencySystem GetCurrencySystem() {

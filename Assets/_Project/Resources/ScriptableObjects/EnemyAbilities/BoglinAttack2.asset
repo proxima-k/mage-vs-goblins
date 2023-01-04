@@ -18,7 +18,7 @@ MonoBehaviour:
   _atkDmg2: 15
   _projSpeed2: 12.5
   spread: 0.57
-  _projCount: 7
+  _projCount: 4
   _damageLayers:
     serializedVersion: 2
     m_Bits: 8

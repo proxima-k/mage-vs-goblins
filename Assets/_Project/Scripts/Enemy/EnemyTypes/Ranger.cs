@@ -61,6 +61,7 @@ public class Ranger : Enemy {
 
     private IEnumerator Attack() {
         _movement.Stop();
+        DangerMarkPopup.Create(transform.position);
         
         // animation alerting player
         yield return new WaitForSeconds(1f);

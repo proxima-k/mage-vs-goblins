@@ -1,10 +1,10 @@
-Shader "Unlit/HealthBar" {
+Shader "Unlit/DashBar" {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Health ("Health", Range(0,1)) = 0.5
-        _MinHealth ("Min Health Color", Color) = (0,0,0,1)
-        _MaxHealth ("Max Health Color", Color) = (0,0,0,1)
+        _DashEnergy ("DashEnergy", Range(0,1)) = 0.5
+        _Recharging ("Recharging", Color) = (0,0,0,1)
+        _FullyCharged ("FullyCharged", Color) = (0,0,0,1)
     }
     SubShader
     {
@@ -28,9 +28,9 @@ Shader "Unlit/HealthBar" {
                 float4 vertex : SV_POSITION;
             };
 
-            float _Health;
-            float4 _MinHealth;
-            float4 _MaxHealth;
+            float _DashEnergy;
+            float4 _Recharging;
+            float4 _FullyCharged;
 
             Interpolators vert (MeshData v) {
                 Interpolators o;
@@ -41,9 +41,9 @@ Shader "Unlit/HealthBar" {
 
             float4 frag (Interpolators i) : SV_Target
             {
-                float4 healthColor = lerp(_MinHealth, _MaxHealth, _Health);
-                healthColor *= (i.uv.x < _Health);
-                return healthColor;
+                float4 dashEnergyColor = (_DashEnergy < 1) * _Recharging + (_DashEnergy >= 1) * _FullyCharged;
+                dashEnergyColor *= (i.uv.x < _DashEnergy);
+                return dashEnergyColor;
             }
             ENDCG
         }

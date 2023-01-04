@@ -18,6 +18,7 @@ public class BoglinAttack1 : Ability {
 
     public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
         Debug.Log("Attack 1");
+        DangerMarkPopup.Create(abilityCaster.position);
         float timer = _atkDuration;
         // abilityCaster.position += Vector3.right * 3f;
         

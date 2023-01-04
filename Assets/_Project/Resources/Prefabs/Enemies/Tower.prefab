@@ -151,8 +151,8 @@ MonoBehaviour:
   _flipSprite: 0
   _projectilePf: {fileID: 5293225535299919432, guid: ff7671419c1f48f48baad0c3701deca2, type: 3}
   _damage: 10
-  _fireRate: 0.7
-  _fireCount: 3
+  _fireRate: 0.6
+  _fireCount: 4
   _rotateSpeed: 0.5
   _damageLayers:
     serializedVersion: 2

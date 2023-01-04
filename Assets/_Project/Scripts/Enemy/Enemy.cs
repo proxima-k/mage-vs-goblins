@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable {
             OnEnemyDeath?.Invoke();
             StartCoroutine(Death());
         };
-        _healthBarMat = transform.Find("HealthBar").GetComponent<MeshRenderer>().material; // find child
+        _healthBarMat = transform.Find("HealthBar").GetComponent<SpriteRenderer>().material; // find child
         UpdateHealthBar();
     }
 

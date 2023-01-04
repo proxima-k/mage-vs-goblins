@@ -15,11 +15,12 @@ public class Shop : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            // disable player movement
             _shopUI.Show(_shopCustomer);
+            PlayerInputManager.I.SetPlayerInput(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) {
             _shopUI.Hide();
-            // enable player movement
+            PlayerInputManager.I.SetPlayerInput(true);
+        }
     }
 }

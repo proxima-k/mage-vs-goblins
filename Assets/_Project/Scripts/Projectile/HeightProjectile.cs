@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Codice.CM.Client.Differences;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class HeightProjectile : Projectile {

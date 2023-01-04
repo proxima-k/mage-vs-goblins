@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public class Boglin : Enemy {
     private enum State {
         Spawn,
         Process,
+        Move,
         Attack1,    // circular projectile
         Attack2,    // target projectile
         // Attack3,    // height projectiles / jump itself?
@@ -50,6 +46,8 @@ public class Boglin : Enemy {
                     // _state = State.Attack1;
                     _processTimer = _processDuration;
                 }
+                break;
+            case State.Move:
                 break;
             case State.Attack1:
                 if (_currentRoutine == null)

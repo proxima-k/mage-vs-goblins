@@ -6,8 +6,6 @@ using TMPro;
 using Random = UnityEngine.Random;
 
 public class DamagePopup : MonoBehaviour {
-
-    
     public static DamagePopup Create(int value, Vector3 origin) {
         DamagePopup damagePopup = Instantiate(GameAssets.i.DamagePopupPrefab, origin, Quaternion.identity).gameObject.AddComponent<DamagePopup>();
         damagePopup.Init(value);
