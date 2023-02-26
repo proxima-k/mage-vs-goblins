@@ -18,7 +18,9 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     protected virtual void Awake() {
         _healthSystem = new HealthSystem(_maxHealth);
-        _healthSystem.OnDamage += UpdateHealthBar;
+        _healthSystem.OnDamage += (damage) => {
+            UpdateHealthBar();
+        };
         _healthSystem.OnDeath += () => {
             OnEnemyDeath?.Invoke();
             StartCoroutine(Death());
@@ -29,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     public void Damage(int damageAmount) {
         _healthSystem.Damage(damageAmount);
-        Debug.Log(_healthSystem.Health);
+        // Debug.Log(_healthSystem.Health);
         DamagePopup.Create(damageAmount, transform.position + Vector3.up);
     }
     

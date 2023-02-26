@@ -41,9 +41,16 @@ public class Orb : ScriptableObject {
     }
 
     public string GetOrbInfo() {
-        return
+        string info =
             Description + "\n" +
             AttackAbility.GetAttributesInfo() + "\n" +
-            UltimateAbility.GetAttributesInfo();
+            UltimateAbility.GetAttributesInfo() + "\n";
+        if (_currLevelIndex == UpgradeCosts.Length)
+            info += "Max Level";
+        else {
+            info += $"Upgrade Cost: {UpgradeCosts[_currLevelIndex]}";
+        }
+
+        return info;
     }
 }

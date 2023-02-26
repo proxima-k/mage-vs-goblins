@@ -10,7 +10,7 @@ public class HealthSystem {
     private int _maxHealth;
 
     public event Action OnDeath;
-    public event Action OnDamage;
+    public event Action<int> OnDamage;
     
     public HealthSystem(int health, int? maxHealth = null) {
         _health = health;
@@ -27,9 +27,10 @@ public class HealthSystem {
 
     public void Damage(int amount) {
         _health -= Mathf.Abs(amount);
-        OnDamage?.Invoke();
+        OnDamage?.Invoke(amount);
         if (_health <= 0) {
             _health = 0;
+            OnDamage?.Invoke(amount);
             OnDeath?.Invoke();
         }
     }

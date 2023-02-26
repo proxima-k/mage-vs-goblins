@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bca165eeedfe8984d84ef56903a18bd4, type: 3}
-  m_Name: BoglinAttack2
+  m_Name: BoglinAbility2
   m_EditorClassIdentifier: 
   _projectilePf: {fileID: 4063976155592968522, guid: 17a1cb27c706c1d4cb40644e786dfc36, type: 3}
-  _atkDmg1: 10
+  _atkDmg1: 15
   _projSpeed1: 15
-  _atkDmg2: 15
+  _atkDmg2: 10
   _projSpeed2: 12.5
   spread: 0.57
-  _projCount: 4
+  _projCount: 7
   _damageLayers:
     serializedVersion: 2
     m_Bits: 8

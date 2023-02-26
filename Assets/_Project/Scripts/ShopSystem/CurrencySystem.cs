@@ -28,4 +28,11 @@ public class CurrencySystem {
         OnCurrencyChanged?.Invoke();
         return true;
     }
+
+    public void SetAmount(int amount) {
+        _currency = amount;
+        if (amount < 0)
+            _currency = 0;
+        OnCurrencyChanged?.Invoke();
+    }
 }

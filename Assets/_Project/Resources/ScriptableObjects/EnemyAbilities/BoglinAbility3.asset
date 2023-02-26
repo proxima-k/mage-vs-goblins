@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c42e82a4d2d934d9495318d2d86b59, type: 3}
+  m_Name: BoglinAbility3
+  m_EditorClassIdentifier: 
+  _enemyTypesToSummon:
+  - _enemyTypeTf: {fileID: 4603993111027079742, guid: 5f4f522a0ece27d4f8a80406e9568ad5, type: 3}
+    _summonAmountRange: {x: 2, y: 3}
+  - _enemyTypeTf: {fileID: 4179775421179812017, guid: f7ad6e8496deab349ab23ddd637f98ae, type: 3}
+    _summonAmountRange: {x: 1, y: 1}
+  - _enemyTypeTf: {fileID: 287079102943599858, guid: e330c88f23d8d564d912d35c9d5cceb2, type: 3}
+    _summonAmountRange: {x: 1, y: 1}
+  _spawnRadius: 3

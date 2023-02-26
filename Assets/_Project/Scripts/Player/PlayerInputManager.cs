@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour {
@@ -11,12 +9,15 @@ public class PlayerInputManager : MonoBehaviour {
                 GameObject gameObj = new GameObject();
                 _instance = gameObj.AddComponent<PlayerInputManager>();
             }
-
             return _instance;
         }
     }
 
     public event Action<bool> OnSetPlayerInput;
+
+    private void Awake() {
+        _instance = this;
+    }
 
     private void Start() {
         SetPlayerInput(true);

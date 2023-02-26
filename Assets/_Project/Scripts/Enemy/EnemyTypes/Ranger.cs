@@ -11,7 +11,7 @@ public class Ranger : Enemy {
         Death
     }
     private State _state = State.Spawn;
-    private BotMovement _movement;
+    private BotLocomotion _locomotion;
 
     [SerializeField] private Transform _projectilePf;
     [SerializeField] private int _damage;
@@ -26,7 +26,7 @@ public class Ranger : Enemy {
     
     protected override void Awake() {
         base.Awake();
-        _movement = GetComponent<BotMovement>();
+        _locomotion = GetComponent<BotLocomotion>();
     }
 
     private void Update() {
@@ -37,7 +37,7 @@ public class Ranger : Enemy {
             case State.Chase:
                 // todo: make ranger locate a position around player before shooting
                 // chase player
-                _movement.MoveTowards(_targetTf.position);
+                _locomotion.MoveTowards(_targetTf.position);
 
                 if (_attackTimer <= 0) {
                     if ((_targetTf.position - transform.position).sqrMagnitude <= _attackDistance * _attackDistance)
@@ -60,7 +60,7 @@ public class Ranger : Enemy {
     }
 
     private IEnumerator Attack() {
-        _movement.Stop();
+        _locomotion.Stop();
         DangerMarkPopup.Create(transform.position);
         
         // animation alerting player

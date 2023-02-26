@@ -9,7 +9,7 @@ public class Builder : Enemy {
         Death
     }
     private State _state = State.Spawn;
-    private BotMovement _movement;
+    private BotLocomotion _locomotion;
 
     // building properties
     [SerializeField] private Transform _towerPf;
@@ -18,7 +18,7 @@ public class Builder : Enemy {
     
     protected override void Awake() {
         base.Awake();
-        _movement = GetComponent<BotMovement>();
+        _locomotion = GetComponent<BotLocomotion>();
     }
 
     private void Update() {
@@ -31,10 +31,10 @@ public class Builder : Enemy {
                 // perhaps take cover if it has a tower
                 // if builder doesn't have a tower, then run away from player
                 if (_targetTf != null) {
-                    _movement.MoveTowards(_targetTf.position);
+                    _locomotion.MoveTowards(_targetTf.position);
                 }
                 else {
-                    _movement.Stop();
+                    _locomotion.Stop();
                 }
 
 

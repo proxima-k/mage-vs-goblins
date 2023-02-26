@@ -4,27 +4,28 @@ using AbilitySystem;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AbilitySystem/Boglin Attack 2")]
-public class BoglinAttack2 : Ability {
+public class BoglinAbility2 : Ability {
     public Transform _projectilePf;
     // phase 1
-    public int _atkDmg1 = 10;
-    public float _projSpeed1 = 12.5f;
+    public int _atkDmg1 = 15;
+    public float _projSpeed1 = 15f;
     
     // phase 2
-    public int _atkDmg2 = 15;
-    public float _projSpeed2 = 15f;
+    public int _atkDmg2 = 10;
+    public float _projSpeed2 = 12.5f;
     [Range(0f,Mathf.PI)]
-    public float spread;
-    public int _projCount = 4;
+    public float spread = 0.57f;
+    public int _projCount = 5;
 
     public LayerMask _damageLayers;
 
     // private const float TAU = Mathf.PI * 2;
     
     public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
-        Debug.Log("Attack 2");
+        Debug.Log("Ability 2");
         DangerMarkPopup.Create(abilityCaster.position);
         Transform targetTf = abilityCaster.GetComponent<Enemy>().GetTarget();
+        yield return new WaitForSeconds(1f);
         
         // PHASE 1: launch 2 individual projectile
         Vector3 targetDir = (targetTf.position - abilityCaster.position).normalized;
@@ -48,7 +49,7 @@ public class BoglinAttack2 : Ability {
         
         for (int i = 0; i < _projCount; i++) {
             targetDir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
-            AttackUtils.ShootProjectile(_projectilePf, _atkDmg1, abilityCaster.position, targetDir, _projSpeed2, _damageLayers, true);
+            AttackUtils.ShootProjectile(_projectilePf, _atkDmg2, abilityCaster.position, targetDir, _projSpeed2, _damageLayers, true);
 
             // projectile count - 1 means the number of intervals between shooting directions
             rad += spread * 2 / (_projCount-1);

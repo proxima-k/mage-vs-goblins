@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using Object = System.Object;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour {
+    [Header("UI stuff")]
+    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private GameObject InstructionUI;
+    [SerializeField] private GameObject Shop;
+    
     [SerializeField] private Transform _playerTf;
     [SerializeField] private Rect spawnField = new Rect(Vector2.zero, Vector2.one);
-    // array of waves
-    // each wave i get to choose which enemy type I wanna spawn and how many of them
     [SerializeField] private Transform[] _enemyTypes;
 
     [Header("Level Layout")]
@@ -16,16 +19,40 @@ public class LevelManager : MonoBehaviour {
     private Coroutine _gameCoroutine;
     private int _currentEnemyCount = 0;
 
+    private bool _gameHasStarted;
+
     private void Start() {
-        _gameCoroutine = StartCoroutine(StartGame());
+        GameStateUIManager.I.OnPlayerWin += StopGame;
+        _levelText.text = "";
     }
 
-    public IEnumerator StartGame() {
+    private void Update() {
+        if (!_gameHasStarted && Input.GetKeyDown(KeyCode.Alpha3) && _gameCoroutine == null) {
+            InstructionUI.SetActive(false);
+            Shop.SetActive(false);
+            StartGame();
+        }
+    }
+
+    private void StartGame() {
+        _gameCoroutine = StartCoroutine(StartLevel());
+        // GameManager.Instance.Save();
+    }
+    
+    public void StopGame() {
+        StopCoroutine(_gameCoroutine);
+    }
+    
+    public IEnumerator StartLevel() {
         // level iteration
         foreach (var level in _levels) {
-            while (_currentEnemyCount > 0) {
-                yield return null;
-            }
+            int currentLevelIndex = Array.IndexOf(_levels, level);
+            if (currentLevelIndex == _levels.Length-1)
+                _levelText.text = $"Final Boss: Boglin";
+            else
+                _levelText.text = $"Level {currentLevelIndex+1}";
+                // _levelText.text = $"Final Boss: Boglin";
+            
             foreach (var wave in level.Waves) {
                     // checking wave type
                     if (wave.WaitForPreviousEnemiesAreDead)
@@ -36,15 +63,14 @@ public class LevelManager : MonoBehaviour {
                     // spawning enemies after the wait type has ended
                     SpawnEnemies(_enemyTypes[wave.EnemyIndex], wave.SpawnAmount);
             }
+            while (_currentEnemyCount > 0) {
+                yield return null;
+            }
         }
 
         yield return null;
     }
 
-    public void StopWave() {
-        StopCoroutine(_gameCoroutine);
-    }
-    
     public void SpawnEnemies(Transform enemyType, int enemyCount) {
         for (int i = 0; i < enemyCount; i++) {
             Vector3 spawnPos = new Vector3(

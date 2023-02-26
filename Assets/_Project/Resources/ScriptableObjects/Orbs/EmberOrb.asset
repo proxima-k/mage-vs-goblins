@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EmberOrb
   m_EditorClassIdentifier: 
   OrbName: Ember
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 88a56e0c6eae66e42973e96f74d5499d, type: 3}
   Description: Fireballs.
   AttackAbility: {fileID: 11400000, guid: f470dbfc1cff27b4d8a18306c5fed8a3, type: 2}
   UltimateAbility: {fileID: 11400000, guid: c102d093190bbcd488716a6f82c8aa62, type: 2}

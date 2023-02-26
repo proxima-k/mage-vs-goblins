@@ -1,11 +1,8 @@
-using System;
-using Proxima_K.Utils;
 using UnityEngine;
-using AbilitySystem;
 
 public class PlayerSkillManager : MonoBehaviour {
     [SerializeField] private Orb _currOrb;
-    [SerializeField] private float aoeRadius = 3f;
+    [SerializeField] private bool canReset;
 
     private bool _canInput;
 
@@ -27,7 +24,7 @@ public class PlayerSkillManager : MonoBehaviour {
             StartCoroutine(_currOrb.UltimateAbility.TriggerAbility(transform));
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (canReset && Input.GetKeyDown(KeyCode.E)) {
             _currOrb.ResetOrbLevel();
         }
     }
@@ -36,7 +33,9 @@ public class PlayerSkillManager : MonoBehaviour {
         _currOrb = orb;
     }
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos() {
         // Gizmos.DrawWireSphere(PK.GetMouseWorldPosition2D(Camera.main), aoeRadius);
     }
+    #endif
 }

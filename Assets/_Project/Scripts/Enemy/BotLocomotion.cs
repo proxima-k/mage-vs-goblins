@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BotMovement : MonoBehaviour {
+public class BotLocomotion : MonoBehaviour {
     
     public float _minMoveSpeed = 2f;
     public float _maxMoveSpeed = 5f;
@@ -36,7 +36,7 @@ public class BotMovement : MonoBehaviour {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update() {
+    void FixedUpdate() {
         if (_canMove) {
             // get a desired velocity
             // get current velocity
@@ -62,7 +62,9 @@ public class BotMovement : MonoBehaviour {
 
             _rb2D.velocity = Vector2.Lerp(_rb2D.velocity, desiredVelocity, _lerp);
             // _rb2D.velocity = desiredVelocity;
-            UpdateFacingDirection();
+            
+            if (_spriteRenderer != null)
+                UpdateFacingDirection();
         }
     }
 

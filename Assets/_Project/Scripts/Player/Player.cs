@@ -19,13 +19,19 @@ public class Player : MonoBehaviour, IShopCustomer, IDamageable, IPickuper {
         _healthBarMat = _healthBar.material;
         _currencySystem = new CurrencySystem(_startingCurrency);
         _healthSystem = new HealthSystem(_maxHealth);
-        _healthSystem.OnDamage += UpdateHealthBar;
+        _healthSystem.OnDamage += damage => {
+            UpdateHealthBar();
+        };
 
         UpdateHealthBar();
         // trigger game over scene
         _healthSystem.OnDeath += () => {
             PlayerInputManager.I.SetPlayerInput(false);
-            DeathUI.SetActive(true);
+            GameStateUIManager.I.TriggerGameOver();
+            EnableBoxCollider(false);
+        };
+        GameStateUIManager.I.OnPlayerWin += () => {
+            EnableBoxCollider(false);
         };
     }
 
@@ -46,5 +52,8 @@ public class Player : MonoBehaviour, IShopCustomer, IDamageable, IPickuper {
         _healthText.text = _healthSystem.Health.ToString();
         _healthBarMat.SetFloat("_Health", _healthSystem.HealthPercentage);
     }
-    
+
+    private void EnableBoxCollider(bool enable) {
+        GetComponent<BoxCollider2D>().enabled = enable;
+    }
 }

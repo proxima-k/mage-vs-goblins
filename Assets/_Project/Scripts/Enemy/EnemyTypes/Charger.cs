@@ -11,7 +11,7 @@ public class Charger : Enemy {
         Death
     }
     private State _state = State.Spawn;
-    private BotMovement _botMovement;
+    private BotLocomotion _botLocomotion;
     private Rigidbody2D _rb2D;
 
     [SerializeField] private int _chargeDamage = 8;
@@ -32,7 +32,7 @@ public class Charger : Enemy {
 
     protected override void Awake() {
         base.Awake();
-        _botMovement = GetComponent<BotMovement>();
+        _botLocomotion = GetComponent<BotLocomotion>();
         _rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -42,7 +42,7 @@ public class Charger : Enemy {
                 _state = State.Chase;
                 break;
             case State.Chase:
-                _botMovement.MoveTowards(_targetTf.position);
+                _botLocomotion.MoveTowards(_targetTf.position);
                 // if within range, set state to charge
                 if (_chargeTimer <= 0) {
                     if ((_targetTf.position - transform.position).sqrMagnitude <= _attackDistance * _attackDistance) {
@@ -70,42 +70,42 @@ public class Charger : Enemy {
     private IEnumerator Charge() {
         // release smoke or blink to indicate about to charge
         // wait for a short period
-        _botMovement.Stop();
+        _botLocomotion.Stop();
         // Transform damageMarkPopupTf = DamageMarkPopup.Create(transform.position).transform;
         // damageMarkPopupTf.SetParent(transform);
         DangerMarkPopup.Create(transform.position);
         
         yield return new WaitForSeconds(_pauseBeforeChargeDuration);
 
-        float initialSteer = _botMovement._maxSteeringForce;
-        _botMovement._maxSteeringForce *= _steerMultiplier;
-        float initialSpeed = _botMovement._maxMoveSpeed;
-        _botMovement._maxMoveSpeed = _chargeSpeed;
-        _botMovement.CanSlow(false);
-        _botMovement.CanAvoid(false);
+        float initialSteer = _botLocomotion._maxSteeringForce;
+        _botLocomotion._maxSteeringForce *= _steerMultiplier;
+        float initialSpeed = _botLocomotion._maxMoveSpeed;
+        _botLocomotion._maxMoveSpeed = _chargeSpeed;
+        _botLocomotion.CanSlow(false);
+        _botLocomotion.CanAvoid(false);
 
         _hasHitPlayer = false;
         
         float timer = _chargeDuration;
         CinemachineShake.Instance.ScreenShake(1f, _chargeDuration);
         while (timer > 0) {
-            _botMovement.MoveTowards(_targetTf.position);
+            _botLocomotion.MoveTowards(_targetTf.position);
 
-            if (_botMovement.TargetIsBehind()) {
-                _botMovement._maxSteeringForce = 0.05f;
+            if (_botLocomotion.TargetIsBehind()) {
+                _botLocomotion._maxSteeringForce = 0.05f;
                 break;
             }
-            yield return new WaitForEndOfFrame();
-            timer -= Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+            timer -= Time.fixedDeltaTime;
         }
         
-        _botMovement.MoveTowards(transform.position + (Vector3)_rb2D.velocity.normalized * _botMovement._slowRadius * 2);
-        _botMovement.CanSlow(true);
+        _botLocomotion.MoveTowards(transform.position + (Vector3)_rb2D.velocity.normalized * _botLocomotion._slowRadius * 2);
+        _botLocomotion.CanSlow(true);
         yield return new WaitForSeconds(2f); // charger slowing down to rest
 
-        _botMovement._maxMoveSpeed = initialSpeed;
-        _botMovement._maxSteeringForce = initialSteer;
-        _botMovement.CanAvoid(true);
+        _botLocomotion._maxMoveSpeed = initialSpeed;
+        _botLocomotion._maxSteeringForce = initialSteer;
+        _botLocomotion.CanAvoid(true);
         _state = State.Chase;
     }
     

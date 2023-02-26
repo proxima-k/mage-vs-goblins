@@ -154,8 +154,8 @@ MonoBehaviour:
     m_Bits: 119
   avoidanceWeight: 1
   seekWeight: 1
-  _maxSteeringForce: 0.1
-  _lerp: 0.66
+  _maxSteeringForce: 1
+  _lerp: 1
   _slowRadius: 2.1
   flipSprite: 0
 --- !u!114 &4179775421179812023
@@ -184,7 +184,7 @@ MonoBehaviour:
   _chargeSpeed: 9
   _pauseBeforeChargeDuration: 0.75
   _chargeDuration: 1.25
-  _steerMultiplier: 0.402
+  _steerMultiplier: 0.6
 --- !u!1001 &6225418602141493147
 PrefabInstance:
   m_ObjectHideFlags: 0

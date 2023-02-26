@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4603993111027079729}
   - component: {fileID: 4603993111027079728}
   - component: {fileID: 4603993111027079731}
-  - component: {fileID: 4603993111027079740}
   - component: {fileID: 4603993111027079743}
+  - component: {fileID: 4603993111027079740}
   m_Layer: 6
   m_Name: Ranger
   m_TagString: Untagged
@@ -134,6 +134,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4603993111027079743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4603993111027079730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9da81e38ef4304fae32fbc985e68f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minMoveSpeed: 2
+  _maxMoveSpeed: 4
+  _avoidRadius: 1
+  _avoidLayers:
+    serializedVersion: 2
+    m_Bits: 119
+  avoidanceWeight: 1
+  seekWeight: 1
+  _maxSteeringForce: 1
+  _lerp: 1
+  _slowRadius: 1
+  flipSprite: 0
 --- !u!114 &4603993111027079740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 50
   _targetTf: {fileID: 0}
-  _currencyDrop: 2
+  _currencyDrop: 4
   _flipSprite: 0
   _projectilePf: {fileID: 3830183629775902812, guid: ce620713e0423694fa99e878fba20a05, type: 3}
   _damage: 4
@@ -158,30 +182,6 @@ MonoBehaviour:
   _damageLayers:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &4603993111027079743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4603993111027079730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a9da81e38ef4304fae32fbc985e68f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minMoveSpeed: 2
-  _maxMoveSpeed: 3
-  _avoidRadius: 1
-  _avoidLayers:
-    serializedVersion: 2
-    m_Bits: 119
-  avoidanceWeight: 1
-  seekWeight: 1
-  _maxSteeringForce: 0.05
-  _lerp: 0.8
-  _slowRadius: 1
-  flipSprite: 0
 --- !u!1001 &2018771143733942629
 PrefabInstance:
   m_ObjectHideFlags: 0

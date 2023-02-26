@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour {
@@ -33,6 +32,7 @@ public class ShopUI : MonoBehaviour {
         // if orb is unlocked
         Transform card = Instantiate(cardPrefab, cardGrid, true);
         card.Find("NameText").GetComponent<TextMeshProUGUI>().text = orb.OrbName;
+        card.Find("OrbDisplay/Image").GetComponent<Image>().sprite = orb.Icon;
         Button shopButton = card.GetComponent<Button>();
         // might need to refactor this, seems illegal ;-;
         shopButton.onClick.AddListener(() => ClickButton(shopButton, orb));
@@ -53,8 +53,10 @@ public class ShopUI : MonoBehaviour {
     
     private void BuyUpgrade(Orb orb) {
         if (orb.CanUpgrade()) {
-            if (orb.UpgradeOrb(_shopCustomer.GetCurrencySystem()))
+            if (orb.UpgradeOrb(_shopCustomer.GetCurrencySystem())) {
                 Debug.Log($"Upgrade purchased! {orb.OrbName} is now level {orb.Level}");
+                GameManager.Instance.Save();
+            }
         }
         // events firing for buying stuff
         /*
@@ -80,4 +82,3 @@ public class ShopUI : MonoBehaviour {
     }
 }
 
-// block template monobehavior?
