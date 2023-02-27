@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Health: 0.66
+    - _Health: 1
     m_Colors:
     - _MaxHealth: {r: 0.7453488, g: 1, b: 0.25, a: 1}
     - _MinHealth: {r: 1, g: 0.16470589, b: 0.16470589, a: 1}
