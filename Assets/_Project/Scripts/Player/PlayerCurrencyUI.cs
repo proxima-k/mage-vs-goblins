@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerCurrencyUI : MonoBehaviour {
     [SerializeField] private Player _player;
-    private CurrencySystem _playerCurrencySystem;
     [SerializeField] private TextMeshProUGUI _textMesh;
+    private CurrencySystem _playerCurrencySystem;
 
     private void Start() {
         _playerCurrencySystem = _player.GetCurrencySystem();

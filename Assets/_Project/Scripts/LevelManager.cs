@@ -36,11 +36,12 @@ public class LevelManager : MonoBehaviour {
 
     private void StartGame() {
         _gameCoroutine = StartCoroutine(StartLevel());
-        // GameManager.Instance.Save();
+        _gameHasStarted = true;
     }
     
     public void StopGame() {
         StopCoroutine(_gameCoroutine);
+        _gameHasStarted = false;
     }
     
     public IEnumerator StartLevel() {

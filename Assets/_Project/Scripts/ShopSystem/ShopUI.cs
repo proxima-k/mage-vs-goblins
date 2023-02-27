@@ -3,10 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour {
-    // block template
-        // orb sprite and name
-        // when clicked, show next upgrade stats
-            // get list of attributes
+
     [SerializeField] private Transform cardPrefab;
     [SerializeField] private Transform cardGrid;
     [SerializeField] private TextMeshProUGUI _textMesh;

@@ -18,14 +18,11 @@ public class BoglinAbility1 : Ability {
     private const float TAU = Mathf.PI * 2;
 
     public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
-        Debug.Log("Ability 1");
+        // Debug.Log("Ability 1");
         DangerMarkPopup.Create(abilityCaster.position);
         yield return new WaitForSeconds(1f);
-        // abilityCaster.position += Vector3.right * 3f;
-        
-        // move to a location
-        // start casting the ability
-        
+
+        // cast ability
         float timer = _atkDuration;
         float pauseTimer = 0;
         float rad = 0;

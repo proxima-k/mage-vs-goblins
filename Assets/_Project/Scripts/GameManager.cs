@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour {
     [SerializeField] private Player _player;
@@ -50,6 +48,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    // data to be saved
     private class SaveObject {
         public int currencyAmount;
     }

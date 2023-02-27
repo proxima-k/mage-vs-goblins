@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using AbilitySystem;
 using UnityEngine;
 
@@ -39,7 +36,7 @@ public class Orb : ScriptableObject {
         AttackAbility.ResetAbilityLevel();
         _currLevelIndex = 0;
     }
-
+    
     public string GetOrbInfo() {
         string info =
             Description + "\n" +

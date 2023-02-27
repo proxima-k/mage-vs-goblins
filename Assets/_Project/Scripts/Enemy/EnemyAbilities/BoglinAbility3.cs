@@ -15,7 +15,6 @@ public class BoglinAbility3 : Ability {
         Transform target = abilityCaster.GetComponent<Enemy>().GetTarget();
 
         // summoning mobs to distract player
-        // int enemiesAlive = 0;
         float radius, radian;
         Vector3 summonPos;
         foreach (var enemyType in _enemyTypesToSummon) {
@@ -29,29 +28,16 @@ public class BoglinAbility3 : Ability {
                 
                 Enemy enemy = Instantiate(enemyType.EnemyTypeTf, summonPos, Quaternion.identity).GetComponent<Enemy>();
                 enemy.SetTarget(target);
-                
-                
-                // enemiesAlive++;
-                // enemy.OnEnemyDeath += () => { enemiesAlive--; };
 
                 yield return new WaitForSeconds(0.5f);
             }
         }
-
-        // summon towers around boglin that heals over time if not destroyed
-        // for loop instantiate towers
-
-        /* while (enemiesAlive > 0) {
-            yield return null;
-        } */
         
+        // after summoning, wait for an amount of time before engaging in attack again
         yield return new WaitForSeconds(6f);
         callback?.Invoke();
     }
 
-    private void KillEnemy() {
-        
-    }
 }
 [Serializable]
 public class EnemyTypeToSummon {

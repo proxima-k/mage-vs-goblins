@@ -17,8 +17,6 @@ namespace AbilitySystem {
             _levelIndex = 0;
             attributeList = attributeAttributeList;
         }
-
-        // SetLevel() -> for data saving purposes?
         
         public void NextLevel() {
             if (_levelIndex < attributeList.Count - 1) {

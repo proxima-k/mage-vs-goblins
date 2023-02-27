@@ -6,7 +6,6 @@ using Proxima_K.Utils;
 
 [CreateAssetMenu(menuName = "AbilitySystem/Shoot Projectile Ability")]
 public class ShootProjectileAbility : Ability {
-    // todo: think about the projectile script
     public Transform projectilePrefab; 
     public LayerMask collisionLayers;
     

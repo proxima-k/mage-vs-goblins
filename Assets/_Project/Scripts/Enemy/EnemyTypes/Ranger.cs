@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ranger : Enemy {
@@ -19,7 +17,6 @@ public class Ranger : Enemy {
     [SerializeField] private float _attackCooldown = 1f;
     [SerializeField] private float _projectileSpeed = 10f;
     [SerializeField] private LayerMask _damageLayers;
-    // [SerializeField] private f
 
     private float _attackTimer;
     private Coroutine _attackRoutine;
@@ -35,20 +32,18 @@ public class Ranger : Enemy {
                 _state = State.Chase;
                 break;
             case State.Chase:
-                // todo: make ranger locate a position around player before shooting
-                // chase player
+                // idea: make ranger locate a position around player before shooting
                 _locomotion.MoveTowards(_targetTf.position);
 
+                // if within range, attack
                 if (_attackTimer <= 0) {
                     if ((_targetTf.position - transform.position).sqrMagnitude <= _attackDistance * _attackDistance)
                         _state = State.Attack;
                 }
                 break;
             case State.Attack:
-                // attack coroutine
                 if (_attackRoutine == null) {
                     _attackRoutine = StartCoroutine(Attack());
-                    // Debug.Log("Attack routine");
                 }
                 break;
             case State.Death:
@@ -63,7 +58,6 @@ public class Ranger : Enemy {
         _locomotion.Stop();
         DangerMarkPopup.Create(transform.position);
         
-        // animation alerting player
         yield return new WaitForSeconds(1f);
         Vector3 dir = (_targetTf.position - transform.position).normalized;
         AttackUtils.ShootProjectile(_projectilePf, _damage, transform.position, dir, _projectileSpeed, _damageLayers, true);

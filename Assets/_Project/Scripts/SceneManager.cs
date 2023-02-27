@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour {
     private static SceneManager _instance;
@@ -30,5 +29,4 @@ public class SceneManager : MonoBehaviour {
     public static void QuitGame() {
         Application.Quit();
     }
-    
 }

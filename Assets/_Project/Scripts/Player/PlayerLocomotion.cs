@@ -1,7 +1,6 @@
 using Proxima_K.Utils;
 using UnityEngine;
 
-
 public class PlayerLocomotion : MonoBehaviour {
     
     private Rigidbody2D _rb2D;
@@ -10,17 +9,16 @@ public class PlayerLocomotion : MonoBehaviour {
     public float MoveSpeed => _moveSpeed;
     
     [Header("Dash Properties")]
-    private bool _isDashing;
     [SerializeField] private float _dashDuration = 0.3f;
     [SerializeField] private float _dashSpeed = 30f;
-    private float _dashTimer;
-    private Vector2 _dashDir;
-    private bool _canDash = true;
-
     [SerializeField] private int _maxDashCharges = 3;
     [SerializeField] private float _dashChargeTank;
     [SerializeField] private float _dashRechargeSpeed = 1;
     [SerializeField] private DashAbilityUI _dashAbilityUI;
+    private bool _isDashing;
+    private float _dashTimer;
+    private Vector2 _dashDir;
+    private bool _canDash = true;
 
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
@@ -104,7 +102,6 @@ public class PlayerLocomotion : MonoBehaviour {
     }
     
     private void RechargeDash() {
-        // if percentage reaches 1, add 1 to current charges
         if (_dashChargeTank >= _maxDashCharges) return;
         _dashChargeTank += Time.deltaTime * _dashRechargeSpeed;
         if (_dashAbilityUI!=null)

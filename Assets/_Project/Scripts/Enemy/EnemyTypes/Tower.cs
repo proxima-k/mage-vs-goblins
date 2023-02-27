@@ -26,16 +26,13 @@ public class Tower : Enemy {
                 _state = State.Shoot;
                 break;
             case State.Shoot:
-                // shooting algorithm
-                // keep track of angle of shooting
-                // add 
                 if (_fireTimer <= 0) {
                     Shoot();
                     _fireTimer = _fireRate;
                 }
                 break;
             case State.Death:
-                // play death stuff
+                // play death animation
                 break;
         }
 

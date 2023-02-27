@@ -1,4 +1,3 @@
-using Proxima_K.Utils;
 using UnityEngine;
 
 public class AttackUtils {
@@ -6,19 +5,15 @@ public class AttackUtils {
         if (collisionLayers == null)
             collisionLayers = ~0;
         
-        // Transform fireballInstance = Object.Instantiate(projectileTf, origin, Quaternion.identity);
         GameObject fireballInstance = new GameObject(projectileTf.name);
         if (rotateProjectile)
             fireballInstance.transform.right = targetDir;
         // projectile properties setup
-        // Projectile projectile = fireballInstance.gameObject.AddComponent<Projectile>();
         Projectile projectile = fireballInstance.AddComponent<Projectile>();
         projectile.Setup(projectileTf, origin, damage, (LayerMask)collisionLayers);
         projectile.OnCollision += () => projectile.DestroyProjectile();
-        // projectile.Launch(PK.GetMouseWorldPosition2D(Camera.main), 0.7f);
         projectile.Launch(targetDir, projectileSpeed);
         
-        // Object.Destroy(projectile.gameObject,5f);
         projectile.DestroyProjectile(5f);
     }
 

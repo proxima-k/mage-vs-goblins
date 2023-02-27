@@ -35,7 +35,9 @@ public class HealthSystem {
         }
     }
     
-    // public void UpgradeMaxHealth(int maxHealth) {
-    //     _maxHealth = maxHealth;
-    // }
+    /*
+        public void UpgradeMaxHealth(int maxHealth) {
+            _maxHealth = maxHealth;
+        }
+    */
 }

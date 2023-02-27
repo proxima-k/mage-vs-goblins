@@ -56,12 +56,11 @@ public class BotLocomotion : MonoBehaviour {
             desiredVelocity = desiredVelocity.normalized * speed;
             
             // if position is close to target, then slow down
-            
             if (_canSlow && (_targetPos - transform.position).sqrMagnitude < _slowRadius * _slowRadius)
                 desiredVelocity *= (_targetPos - transform.position).magnitude / _slowRadius;
 
+            // smoothing out steering and movement
             _rb2D.velocity = Vector2.Lerp(_rb2D.velocity, desiredVelocity, _lerp);
-            // _rb2D.velocity = desiredVelocity;
             
             if (_spriteRenderer != null)
                 UpdateFacingDirection();
@@ -78,7 +77,7 @@ public class BotLocomotion : MonoBehaviour {
         _rb2D.velocity = Vector2.zero;
     }
 
-    // gets a float based on the dot product of current direction and direction towards target
+    // gets a float value based on the dot product of current direction and direction towards target
     // this is to see if the value is positive or negative.
     public bool TargetIsBehind() {
         Vector3 towardsTargetDir = _targetPos - transform.position;
@@ -120,6 +119,7 @@ public class BotLocomotion : MonoBehaviour {
         _spriteRenderer.flipX = _rb2D.velocity.x > 0 ? !flipSprite : flipSprite;
     }
     
+    #if UNITY_EDITOR
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _avoidRadius);
@@ -128,4 +128,5 @@ public class BotLocomotion : MonoBehaviour {
         // if (_target != null && _rb2D != null)
         //     Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb2D.velocity);
     }
+    #endif
 }

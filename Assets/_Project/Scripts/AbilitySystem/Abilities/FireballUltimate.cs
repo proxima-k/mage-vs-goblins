@@ -21,11 +21,9 @@ public class FireballUltimate : Ability {
         
         List<HeightProjectile> projectiles = new List<HeightProjectile>();
         float TAU = Mathf.PI * 2;
-        // select locations
-        // create an instance of height projectile
-        // instantiate a bunch of them
+        
+        // setting up projectiles for launching
         for (int i = 0; i < fireballCount; i++) {
-
             GameObject fireballInstance = new GameObject(projectileTf.name);
             HeightProjectile heightProjectile = fireballInstance.AddComponent<HeightProjectile>();
             heightProjectile.Setup(projectileTf, abilityCaster.position, 10, 0);
@@ -39,16 +37,13 @@ public class FireballUltimate : Ability {
             projectiles.Add(heightProjectile);
         }
 
-        // set each ongroundhit to aoe damage and spawn explosion animation.
-        
         // launch them to the air (caster's position)
-        // wait for timeToLocation/2
-        // launch again to selected location foreach instance
         foreach (var projectile in projectiles) {
             projectile.Launch(abilityCaster.position, timeToReach);
         }
         yield return new WaitForSeconds(timeToReach / 2);
 
+        // launch again to selected location foreach projectile
         int angleCounter = 0;
         foreach (var projectile in projectiles) {
             float rad = TAU * angleCounter / fireballCount;

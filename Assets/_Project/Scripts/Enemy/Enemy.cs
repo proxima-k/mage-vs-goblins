@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable {
@@ -31,13 +30,10 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     public void Damage(int damageAmount) {
         _healthSystem.Damage(damageAmount);
-        // Debug.Log(_healthSystem.Health);
         DamagePopup.Create(damageAmount, transform.position + Vector3.up);
     }
     
-    protected virtual IEnumerator Death() {
-        // change this to IEnumerator if implementing a bunch of animation stuff that requires timing
-        // blink for a few times
+    protected IEnumerator Death() {
         // _ai.SetTarget(null);
         // disable colliders
         GetComponent<Collider2D>().enabled = false;
@@ -60,7 +56,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         Destroy(gameObject);
     }
 
-    public virtual void SetTarget(Transform targetTf) {
+    public void SetTarget(Transform targetTf) {
         _targetTf = targetTf;
     }
 

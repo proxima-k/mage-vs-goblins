@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class DashAbilityUI : MonoBehaviour {
@@ -12,9 +8,7 @@ public class DashAbilityUI : MonoBehaviour {
 
     private float _previousDashChargeTank;
     private static readonly int dashEnergyMatPropID = Shader.PropertyToID("_DashEnergy");
-
-    // var for mat property
-
+    
     public void Initialize(int dashCharges) {
         _dashMaxCharges = dashCharges;
         _dashBarsMat = new Material[dashCharges];
@@ -24,6 +18,7 @@ public class DashAbilityUI : MonoBehaviour {
             
             Image dashBarImage = dashBar.GetComponent<Image>();
             
+            // material instancing
             _dashBarsMat[i] = Instantiate(dashBarImage.material);
             dashBarImage.material = _dashBarsMat[i];
         }
@@ -34,9 +29,7 @@ public class DashAbilityUI : MonoBehaviour {
     public void UpdateDashChargeBar(float dashChargeTank) {
         int currentBarIndex = Mathf.FloorToInt(dashChargeTank);
         int previousBarIndex = Mathf.FloorToInt(_previousDashChargeTank);
-
-        // if current bar index is not the same as last frame's bar index
-        // then that requires some algorithm to empty out or fully fill a bar
+        
         if (currentBarIndex != previousBarIndex) {
             int indexDifference = currentBarIndex - previousBarIndex;
             if (indexDifference < 0) {

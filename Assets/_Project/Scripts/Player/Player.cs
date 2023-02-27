@@ -12,8 +12,6 @@ public class Player : MonoBehaviour, IShopCustomer, IDamageable, IPickuper {
     [SerializeField] private Image _healthBar;
     private Material _healthBarMat;
     [SerializeField] private TextMeshProUGUI _healthText;
-
-    [SerializeField] private GameObject DeathUI;
     
     private void Awake() {
         _healthBarMat = _healthBar.material;

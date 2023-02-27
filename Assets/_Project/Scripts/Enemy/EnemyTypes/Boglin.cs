@@ -8,9 +8,9 @@ public class Boglin : Enemy {
         Move,
         Attack1,    // circular projectile
         Attack2,    // target projectile
-        // Attack3,    // height projectiles / jump itself?
-        Healing,    // spawn towers that heal boss after a time, also spawn enemies to distract players
-        Death       // drop a skull 
+        Summon,     // also spawn enemies to distract players
+        // Healing,    
+        // Death       // drop a skull 
     }
     private State _state = State.Spawn;
     private BotLocomotion _locomotion;
@@ -23,7 +23,7 @@ public class Boglin : Enemy {
     // processing/decision making properties
     [SerializeField] private float _restDuration = 3f;
     private float _restTimer;
-
+    
     [SerializeField] private int damageTaken = 0;
     [SerializeField] private int _damageThresholdToSummon = 600;
     [SerializeField] private float _attackDistance = 4f;
@@ -69,7 +69,7 @@ public class Boglin : Enemy {
                     _currentRoutine = StartCoroutine(
                         ability2.TriggerAbility(transform, ChangeToRestState));
                 break;
-            case State.Healing:
+            case State.Summon:
                 if (_currentRoutine == null)
                     _currentRoutine = StartCoroutine(
                         ability3.TriggerAbility(transform, ChangeToRestState));
@@ -82,11 +82,10 @@ public class Boglin : Enemy {
                 StopCoroutine(_currentRoutine);
                 _currentRoutine = null;
             }
-            _state = State.Healing;
+            _state = State.Summon;
             damageTaken -= _damageThresholdToSummon;
             _locomotion.Stop();
         }
-        // Debug.Log(_state);
     }
     
 

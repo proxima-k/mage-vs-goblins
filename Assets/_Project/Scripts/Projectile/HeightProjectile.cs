@@ -10,12 +10,15 @@ public class HeightProjectile : Projectile {
     public event Action OnGroundHit;
 
     private void Update() {
+        // gravity acting on projectile
         _bodyTf.localPosition -= new Vector3(0, _verticalVelocity * Time.deltaTime);
-        
         _verticalVelocity += _gravity * Time.deltaTime;
+        
+        // ground hit checking
         if (_height+transform.localPosition.y <= transform.localPosition.y) {
             OnGroundHit?.Invoke();
-            // perhaps change this to a function or something like bounce()
+            
+            // cause the projectile to bounce if nothing is called on ground hit
             _verticalVelocity = -_verticalVelocity;
         }
     }
@@ -24,12 +27,12 @@ public class HeightProjectile : Projectile {
         // calculates horizontal velocity base on time
         Vector2 displacement = targetPos - transform.localPosition;
         float speed = displacement.magnitude / timeToReach;
-        // Vector2 horizontalVelocity =  displacement / timeToReach;
+        // uses the base projectile script's function to move horizontally
         base.Launch(displacement.normalized, speed);
 
         // calculates vertical velocity base on time and existing height
         float verticalVelocity = (_height - _gravity * timeToReach * timeToReach * 0.5f) / timeToReach;
-        // Debug.Log("Vertical velo" + verticalVelocity);
         _verticalVelocity = verticalVelocity;
     }
+    
 }

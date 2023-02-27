@@ -10,7 +10,7 @@ public class BoglinAbility2 : Ability {
     public int _atkDmg1 = 15;
     public float _projSpeed1 = 15f;
     
-    // phase 2
+    // phase 2 
     public int _atkDmg2 = 10;
     public float _projSpeed2 = 12.5f;
     [Range(0f,Mathf.PI)]
@@ -22,7 +22,7 @@ public class BoglinAbility2 : Ability {
     // private const float TAU = Mathf.PI * 2;
     
     public override IEnumerator TriggerAbility(Transform abilityCaster, Action callback = null) {
-        Debug.Log("Ability 2");
+        // Debug.Log("Ability 2");
         DangerMarkPopup.Create(abilityCaster.position);
         Transform targetTf = abilityCaster.GetComponent<Enemy>().GetTarget();
         yield return new WaitForSeconds(1f);
@@ -35,7 +35,7 @@ public class BoglinAbility2 : Ability {
         AttackUtils.ShootProjectile(_projectilePf, _atkDmg1, abilityCaster.position, targetDir, _projSpeed1, _damageLayers, true);
         yield return new WaitForSeconds(.5f);
         
-        // PHASE 2: launch a single attack with 3 projectile
+        // PHASE 2: launch a single attack with the assigned number of projectile
         targetDir = (targetTf.position - abilityCaster.position).normalized;
         float rad = Mathf.Atan2(targetDir.y, targetDir.x) - spread;
         
@@ -51,7 +51,7 @@ public class BoglinAbility2 : Ability {
             targetDir = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
             AttackUtils.ShootProjectile(_projectilePf, _atkDmg2, abilityCaster.position, targetDir, _projSpeed2, _damageLayers, true);
 
-            // projectile count - 1 means the number of intervals between shooting directions
+            // (projectile count - 1) means the number of intervals between shooting directions
             rad += spread * 2 / (_projCount-1);
         }
         // todo: add camera shake

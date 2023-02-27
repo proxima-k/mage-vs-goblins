@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LootDropper : MonoBehaviour {
@@ -16,8 +13,8 @@ public class LootDropper : MonoBehaviour {
     }
 
     public void DropCurrency(int amount, Vector3 position) {
-        Transform _currencyPickupInstance = Instantiate(_currencyPickupPf, position, Quaternion.identity);
-        CurrencyPickupable pickupable = _currencyPickupInstance.gameObject.AddComponent<CurrencyPickupable>();
+        Transform currencyPickupTf = Instantiate(_currencyPickupPf, position, Quaternion.identity);
+        CurrencyPickupable pickupable = currencyPickupTf.gameObject.AddComponent<CurrencyPickupable>();
         pickupable.Setup(amount);
     }
 }

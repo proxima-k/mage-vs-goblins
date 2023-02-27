@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// NOTE: This class is still under developed and is not used in the prototype
 public class Builder : Enemy {
     private enum State {
         Spawn,

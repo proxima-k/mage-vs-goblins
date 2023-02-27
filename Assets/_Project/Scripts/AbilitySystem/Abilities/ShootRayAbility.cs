@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using AbilitySystem;
-using Microsoft.Win32.SafeHandles;
 using Proxima_K.Utils;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AbilitySystem/Shoot Ray Ability")]

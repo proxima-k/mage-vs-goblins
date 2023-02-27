@@ -19,7 +19,7 @@ public class CurrencySystem {
     }
 
     public bool Spend(int amount) {
-        // not enough
+        // not enough currency
         if (_currency - amount < 0) 
             return false;
         

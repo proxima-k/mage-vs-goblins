@@ -1,10 +1,9 @@
 using UnityEngine;
-using System.Collections;
 
+// sourced from GucioDevs
 [ExecuteInEditMode]
 [AddComponentMenu("Image Effects/PixelBoy")]
-public class PixelBoy : MonoBehaviour
-{
+public class PixelBoy : MonoBehaviour { 
     public int w = 720;
     public int h;
 

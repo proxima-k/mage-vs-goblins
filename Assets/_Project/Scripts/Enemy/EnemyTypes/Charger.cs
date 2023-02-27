@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Charger : Enemy {
@@ -43,7 +41,8 @@ public class Charger : Enemy {
                 break;
             case State.Chase:
                 _botLocomotion.MoveTowards(_targetTf.position);
-                // if within range, set state to charge
+                
+                // if within range, attack
                 if (_chargeTimer <= 0) {
                     if ((_targetTf.position - transform.position).sqrMagnitude <= _attackDistance * _attackDistance) {
                         _state = State.Charge;
@@ -51,7 +50,6 @@ public class Charger : Enemy {
                 }
                 break;
             case State.Charge:
-                // perhaps merge the coroutine to the distance checking and let this state be empty or something.
                 if (_chargeTimer <= 0) {
                     StartCoroutine(Charge());
                     _chargeTimer = _chargeCooldown;
@@ -68,11 +66,7 @@ public class Charger : Enemy {
     }
 
     private IEnumerator Charge() {
-        // release smoke or blink to indicate about to charge
-        // wait for a short period
         _botLocomotion.Stop();
-        // Transform damageMarkPopupTf = DamageMarkPopup.Create(transform.position).transform;
-        // damageMarkPopupTf.SetParent(transform);
         DangerMarkPopup.Create(transform.position);
         
         yield return new WaitForSeconds(_pauseBeforeChargeDuration);
@@ -88,6 +82,8 @@ public class Charger : Enemy {
         
         float timer = _chargeDuration;
         CinemachineShake.Instance.ScreenShake(1f, _chargeDuration);
+        
+        // actual charging part
         while (timer > 0) {
             _botLocomotion.MoveTowards(_targetTf.position);
 
@@ -99,6 +95,7 @@ public class Charger : Enemy {
             timer -= Time.fixedDeltaTime;
         }
         
+        // slows down after passing player or a duration
         _botLocomotion.MoveTowards(transform.position + (Vector3)_rb2D.velocity.normalized * _botLocomotion._slowRadius * 2);
         _botLocomotion.CanSlow(true);
         yield return new WaitForSeconds(2f); // charger slowing down to rest
@@ -119,9 +116,10 @@ public class Charger : Enemy {
         }
     }
     
-
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, _attackDistance);
         // Gizmos.DrawLine(transform.position, transform.position+(Vector3)_rb2D.velocity);
     }
+#endif
 }
