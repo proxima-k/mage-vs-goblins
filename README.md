@@ -10,7 +10,6 @@ Try out the game! It looks way better than these snipppets 😉
 <br>
 <br>
 <img src="gifs/mvg_gameplay1.gif" alt="Mage fighting rangers" height="300px">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="gifs/mvg_gameplay2.gif" alt="Mage fighting tower" height="300px">  
 
 # Additional notes
