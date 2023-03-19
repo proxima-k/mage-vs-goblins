@@ -6,7 +6,7 @@ He now has to fend them off to move on!
 Download the game at [proxima-k.itch.io/mage-vs-goblins](https://proxima-k.itch.io/mage-vs-goblins)
 
 # Gameplay
-Try out the game! It looks way better than these snipppets 😉
+Try out the game! It looks way better than these snippets 😉
 <br>
 <br>
 <img src="gifs/mvg_gameplay1.gif" alt="Mage fighting rangers" height="300px">
